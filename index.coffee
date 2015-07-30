@@ -1,6 +1,5 @@
 request = require('request')
 config = require('./config')
-serialize = require('node-serialize')
 
 get = (url, callback, opts = false) ->
 
