@@ -26,7 +26,7 @@ get = (url, callback, opts = false) ->
     throw error if error
 
     if response.statusCode is 200
-      callback(body) if callback
+      callback(JSON.parse(body)) if callback
     else
       throw response.statusCode
 
