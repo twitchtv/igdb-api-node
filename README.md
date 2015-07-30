@@ -7,9 +7,9 @@ Read more: https://www.igdb.com/api/v1/documentation
 
 Setup
 -
-* `npm install igdb`
+* `npm install igdb-api-node`
 * Rename `config.json.example` to `config.json` and edit settings.
-* `igdb = require('igdb')`
+* `igdb = require('igdb-api-node')`
 
 Usage
 -
