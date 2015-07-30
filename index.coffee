@@ -1,14 +1,28 @@
 request = require('request')
 config = require('./config')
+serialize = require('node-serialize')
 
-get = (url, callback) ->
+get = (url, callback, opts = false) ->
+
+  url = config.endpoint + url
+  if opts
+    optUrl = []
+    for param, paramValue of opts
+      if param is "filters"
+        for filter, filterValue of paramValue
+          optUrl.push "filters[#{filter}]=#{filterValue}"
+      else
+        optUrl.push "#{param}=#{paramValue}"
+
+    url += "?" + optUrl.join('&')
+
   options =
-    url: config.endpoint + url
+    url: url
     headers:
       'Accept': 'application/json'
       'Authorization': 'Token token="' + config.apikey + '"'
 
-  request url, (error, response, body) ->
+  request options, (error, response, body) ->
 
     throw error if error
 
@@ -21,3 +35,4 @@ module.exports =
   games:
     get: (id, callback) -> get 'games/' + id, callback
     meta: (callback) -> get 'games/meta', callback
+    search: (opts, callback) -> get 'games/search', callback, opts
