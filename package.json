@@ -1,0 +1,28 @@
+{
+  "name": "igdb-api-node",
+  "version": "1.0.0",
+  "description": "Nodejs API Wrapper for IGDB.com",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "coffee index.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igdb/igdb-api-node.git"
+  },
+  "keywords": [
+    "igdb",
+    "games",
+    "api",
+    "wrapper"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/igdb/igdb-api-node/issues"
+  },
+  "homepage": "https://github.com/igdb/igdb-api-node",
+  "dependencies": {
+    "coffee-script": "^1.9.3"
+  }
+}
