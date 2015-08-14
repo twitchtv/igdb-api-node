@@ -15,6 +15,12 @@ Usage
 -
 
 **Games**
+https://www.igdb.com/api/v1/documentation/games
+
+* `games.index(opts, callback)` Returns all games
+```javascript
+igdb.games.index({ limit: 5, offset: 15 }, output)
+```
 
 * `games.get(id, callback)` Returns game information
 ```javascript
@@ -31,9 +37,75 @@ igdb.games.meta(output)
 Read details on the search parameters here: https://www.igdb.com/api/v1/documentation/games
 
 ```javascript
-igdb.games.search
-  q: 'penguin'
-  filters:
+igdb.games.search({
+q: 'penguin',
+{
+  limit: 3,
+  offset: 4,
+  filters: {
     platforms_eq: 3
-, output
+  },
+},
+output
+})
+```
+
+**Companies**
+https://www.igdb.com/api/v1/documentation/companies
+
+* `companies.index(opts, callback)` Returns all companies
+```javascript
+igdb.companies.index({ limit: 5, offset: 15 }, output)
+```
+
+* `companies.get(id, callback)` Returns game information
+```javascript
+igdb.companies.get('nintendo', output)
+```
+
+* `companies.meta(callback)` Returns total companies count.
+```javascript
+igdb.companies.meta(output)
+```
+
+* `igdb.companies.games(opts, companyId, output)`  Returns related games
+
+```javascript
+igdb.companies.games({
+  limit: 3,
+  offset: 4
+}, 'nintendo', output)
+```
+
+**People**
+https://www.igdb.com/api/v1/documentation/people
+
+* `people.index(opts, callback)` Returns all people
+```javascript
+igdb.people.index({ limit: 5, offset: 15 }, output)
+```
+
+* `people.get(id, callback)` Returns game information
+```javascript
+igdb.people.get('satoru-iwata', output)
+```
+
+* `people.meta(callback)` Returns total people count.
+```javascript
+igdb.people.meta(output)
+```
+
+* `igdb.people.games(opts, personId, output)` Returns related games
+
+```javascript
+igdb.people.games({
+  limit: 3,
+  offset: 4
+}, 'satoru-iwata', output)
+```
+
+* `igdb.people.titles(personId, output)` Returns job titles for this person
+
+```javascript
+igdb.people.titles('satoru-iwata', output)
 ```
