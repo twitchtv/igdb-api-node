@@ -9,9 +9,9 @@ https://www.igdb.com/api
 IGDB
 =
 
-Nodejs Wrapper for IGDB.com API. Requires an API key. Request one from your user settings screen.
+Nodejs Wrapper for IGDB.com API. Requires a Mashape.com API key.
 
-Read more: https://www.igdb.com/api/v1/documentation
+Read more: https://market.mashape.com/igdbcom/internet-game-database/overview
 
 Setup
 -
@@ -23,7 +23,6 @@ Usage
 -
 
 **Games**
-https://www.igdb.com/api/v1/documentation/games
 
 * `games.index(opts, callback)` Returns all games
 ```javascript
@@ -42,7 +41,7 @@ igdb.games.meta(output)
 
 * `igdb.games.search(searchParamsObject, output)`
 
-Read details on the search parameters here: https://www.igdb.com/api/v1/documentation/games
+Read details on the search parameters here: https://market.mashape.com/igdbcom/internet-game-database/overview#wiki-filters
 
 ```javascript
 igdb.games.search({
@@ -59,7 +58,6 @@ output
 ```
 
 **Companies**
-https://www.igdb.com/api/v1/documentation/companies
 
 * `companies.index(opts, callback)` Returns all companies
 ```javascript
@@ -86,7 +84,6 @@ igdb.companies.games({
 ```
 
 **People**
-https://www.igdb.com/api/v1/documentation/people
 
 * `people.index(opts, callback)` Returns all people
 ```javascript
