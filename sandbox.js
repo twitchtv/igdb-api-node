@@ -1,7 +1,10 @@
 igdb = require('./index');
 
 function log(res){
-  res.cover = igdb.image(res.cover, 'thumb', 'jpg');
+  for(i in res){
+    game = res[i];
+    game.cover = igdb.image(game.cover);
+  }
   console.log(JSON.stringify(res, null, " "));
 }
 
@@ -33,6 +36,7 @@ var fields = [
 ];
 
 igdb.games({
+  q: "battlfield 4",
   limit: 1,
   offset: 0,
   filters: {
