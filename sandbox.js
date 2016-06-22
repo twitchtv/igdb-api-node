@@ -8,38 +8,29 @@ function log(res){
   console.log(JSON.stringify(res, null, " "));
 }
 
-var fields = [
-'name',
-'slug',
-'created_at',
-'updated_at',
-'summary',
-'storyline',
-'regions',
-'collection',
-'franchise',
-'hypes',
-'rating',
-'rating_count',
-'player_perspectives',
-'game_modes',
-'keywords',
-'themes',
-'genres',
-'status',
-'release_dates',
-'alternative_names',
-'screenshots',
-'cover',
-'esrb',
-'pegi'
-];
+
+igdb.platforms({
+  search: "Atari",
+  limit: 1,
+}, ["name","games"]).then(log);
 
 igdb.games({
-  q: "battlfield 4",
-  limit: 1,
+  search: "zelda",
+  limit: 5,
   offset: 0,
+  order: "release_dates.date:desc",
   filters: {
-    rating_gt: 9
+    "release_dates.date_gt": "2010"
   }
-}, fields).then(log);
+}, ["name","release_dates.date","rating","hypes","cover"]).then(log);
+
+igdb.games({
+  ids: [18472, 18228],
+}, ["name", "cover"]).then(log);
+
+igdb.companies({
+  search: "rockstar",
+  limit: 5,
+  offset: 0,
+  order: "name:desc",
+}, ["name","logo"]).then(log);

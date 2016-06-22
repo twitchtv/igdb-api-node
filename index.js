@@ -17,6 +17,8 @@ var get = function(url, fields, opts, callback) {
           filter = [filter.substring(0, last_underscore), filter.substring(last_underscore+1)]
           optUrl.push("filter[" + filter[0] + "][" + filter[1] + "]=" + filterValue);
         }
+      } else if(param === "ids") {
+        url += "/" + paramValue.join(',')
       } else {
         optUrl.push(param + "=" + paramValue);
       }
@@ -34,6 +36,7 @@ var get = function(url, fields, opts, callback) {
       'X-Mashape-Key': config.apikey
     }
   };
+
   return request(options, function(error, response, body) {
     if (error) {
       throw error;
@@ -48,25 +51,25 @@ var get = function(url, fields, opts, callback) {
   });
 };
 
-module.exports = {
-  games: function(opts, fields) {
+var endpoint = function(e){
+  return function(opts, fields) {
     return new Promise(function(resolve, reject){
-      get('games', fields, opts, resolve);
+      get(e, fields, opts, resolve);
     });
-  },
-  companies: {
-    index: function(opts, fields) {
-      return get('companies', fields, opts);
-    }
-  },
-  people: {
-    index: function(opts, fields) {
-      return get('people', fields, opts);
-    }
-  },
+  }
+}
+
+var endpoints = ["games", "companies", "people", "genres", "keywords", "platforms", "player_perspectives", "pulses", "themes", "franchises", "collections"],
+endpoints_obj = {
   image: function(image_object, size = "thumb", filetype = "jpg"){
     if(image_object){
       return "https://res.cloudinary.com/igdb/image/upload/t_" + size + "/" + image_object.cloudinary_id + "." + filetype;
     }
   }
 };
+
+for(i = 0; i < endpoints.length; i++){
+  endpoints_obj[endpoints[i]] = endpoint(endpoints[i]);
+}
+
+module.exports = endpoints_obj
