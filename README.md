@@ -24,93 +24,54 @@ Usage
 
 **Games**
 
-* `games.index(opts, callback)` Returns all games
+* `games(opts)` Returns all games
 ```javascript
-igdb.games.index({ limit: 5, offset: 15 }, output)
+igdb.games({ limit: 5, offset: 15, fields: "*" }).then(output)
 ```
 
-* `games.get(id, callback)` Returns game information
+* `games.get({ ids: [3766] })` Returns game information
 ```javascript
-igdb.games.get(3766, output)
+igdb.games({ ids: [3766], fields: "*" }).then(output)
 ```
 
-* `games.meta(callback)` Returns total unique games count. (IE Mass effect (xbox/ps/pc) only counts as 1)
-```javascript
-igdb.games.meta(output)
-```
-
-* `igdb.games.search(searchParamsObject, output)`
+* `igdb.games({ search: "zelda", fields: "*" })`
 
 Read details on the search parameters here: https://market.mashape.com/igdbcom/internet-game-database/overview#wiki-filters
 
 ```javascript
-igdb.games.search({
-q: 'penguin',
-{
+igdb.games({
+  search: 'penguin',
   limit: 3,
   offset: 4,
   filters: {
     platforms_eq: 3
   },
-},
-output
-})
+  fields: "*"
+}).then(output)
 ```
 
 **Companies**
 
-* `companies.index(opts, callback)` Returns all companies
+* `companies.index(opts).then(output)` Returns all companies
 ```javascript
-igdb.companies.index({ limit: 5, offset: 15 }, output)
+igdb.companies({ limit: 5, offset: 15, fields: "*" }).then(output)
 ```
 
 * `companies.get(id, callback)` Returns game information
 ```javascript
-igdb.companies.get('nintendo', output)
+igdb.companies({ search: 'nintendo', fields: "*" }).then(output)
 ```
 
-* `companies.meta(callback)` Returns total companies count.
-```javascript
-igdb.companies.meta(output)
+Many more data entities are documented here: https://market.mashape.com/igdbcom/internet-game-database
+
+**Images**
+
+A handy image function is included to convert objects with cloudinary_ids to full urls.
+
+```
+igdb.image(cover, "thumb", "jpg")
 ```
 
-* `igdb.companies.games(opts, companyId, output)`  Returns related games
+More options are documented here: https://market.mashape.com/igdbcom/internet-game-database/overview#wiki-images
 
-```javascript
-igdb.companies.games({
-  limit: 3,
-  offset: 4
-}, 'nintendo', output)
-```
-
-**People**
-
-* `people.index(opts, callback)` Returns all people
-```javascript
-igdb.people.index({ limit: 5, offset: 15 }, output)
-```
-
-* `people.get(id, callback)` Returns game information
-```javascript
-igdb.people.get('satoru-iwata', output)
-```
-
-* `people.meta(callback)` Returns total people count.
-```javascript
-igdb.people.meta(output)
-```
-
-* `igdb.people.games(opts, personId, output)` Returns related games
-
-```javascript
-igdb.people.games({
-  limit: 3,
-  offset: 4
-}, 'satoru-iwata', output)
-```
-
-* `igdb.people.titles(personId, output)` Returns job titles for this person
-
-```javascript
-igdb.people.titles('satoru-iwata', output)
-```
+Also check out the sandbox.js file for more examples.
