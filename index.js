@@ -27,8 +27,6 @@ var get = function(url, fields, opts, callback) {
     url += "?" + optUrl.join('&');
   }
 
-  console.log(url);
-
   var options = {
     url: url,
     headers: {
