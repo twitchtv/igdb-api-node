@@ -12,6 +12,11 @@ var perform_request = function(url, resolve, reject){
   };
 
   return request(options, function(error, response, body) {
+
+    if(!error){
+      error = (response.statusCode != 200 ? response.statusCode + " - " + options.url : null);
+    }
+
     if (error) {
       if(reject){
         return reject(error);
@@ -20,23 +25,14 @@ var perform_request = function(url, resolve, reject){
       }
     }
 
-    if (response.statusCode == 200) {
-      if (resolve) {
-        return resolve({
-          url: options.url,
-          body: JSON.parse(body),
-          head: response.headers,
-          scroll_url: response.headers['X-Next-Page'],
-          scroll_count: response.headers['X-Count']
-        });
-      }
-    } else {
-      var error = response.statusCode + " - " + options.url;
-      if(reject){
-        return reject(error);
-      }else{
-        throw error;
-      }
+    if (response.statusCode == 200 && resolve) {
+      return resolve({
+        url: options.url,
+        body: JSON.parse(body),
+        head: response.headers,
+        scroll_url: response.headers['X-Next-Page'],
+        scroll_count: response.headers['X-Count']
+      });
     }
   });
 }
@@ -58,7 +54,11 @@ var get = function(url, fields, opts, resolve, reject) {
         optUrl.push(param + "=" + paramValue);
       }
     }
-    if(fields){ optUrl.push("fields=" + fields.join(',')); }
+
+    if(fields){
+      optUrl.push("fields=" + fields.join(','));
+    }
+
     url += "?" + optUrl.join('&');
   }
 
