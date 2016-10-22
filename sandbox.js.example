@@ -1,18 +1,17 @@
 igdb = require('./index');
 
 function log(res){
-  for(i in res){
-    game = res[i];
+  for(i in res.body){
+    game = res.body[i];
     game.cover = igdb.image(game.cover, "cover_small");
   }
-  console.log(JSON.stringify(res, null, " "));
+  console.log(res.url, JSON.stringify(res.body, null, " "));
 }
-
 
 igdb.platforms({
   search: "Atari",
-  limit: 1,
-}, ["name","games"]).then(log);
+  limit: 2
+}, ["name"]).then(log);
 
 igdb.games({
   search: "zelda",
@@ -20,7 +19,8 @@ igdb.games({
   offset: 0,
   order: "release_dates.date:desc",
   filters: {
-    "release_dates.date-gt": "2010"
+    "release_dates.date-gt": "2010-12-31",
+    "release_dates.date-lt": "2012-01-01"
   }
 }, ["name","release_dates.date","rating","hypes","cover"]).then(log);
 
@@ -33,4 +33,5 @@ igdb.companies({
   limit: 5,
   offset: 0,
   order: "name:desc",
+  field: "name"
 }, ["name","logo"]).then(log);
