@@ -3,7 +3,7 @@ igdb = require('./index');
 function log(res){
   for(i in res){
     game = res[i];
-    game.cover = igdb.image(game.cover);
+    game.cover = igdb.image(game.cover, "cover_small");
   }
   console.log(JSON.stringify(res, null, " "));
 }
@@ -20,7 +20,7 @@ igdb.games({
   offset: 0,
   order: "release_dates.date:desc",
   filters: {
-    "release_dates.date_gt": "2010"
+    "release_dates.date-gt": "2010"
   }
 }, ["name","release_dates.date","rating","hypes","cover"]).then(log);
 

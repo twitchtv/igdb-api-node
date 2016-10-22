@@ -44,7 +44,7 @@ igdb.games({
   limit: 3,
   offset: 4,
   filters: {
-    platforms_eq: 3
+    "platforms-eq": 3
   },
   fields: "*"
 }).then(output)

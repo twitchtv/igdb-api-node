@@ -13,8 +13,8 @@ var get = function(url, fields, opts, callback) {
       if (param === "filters") {
         for (filter in paramValue) {
           var filterValue = paramValue[filter];
-          last_underscore = filter.lastIndexOf('_');
-          filter = [filter.substring(0, last_underscore), filter.substring(last_underscore+1)]
+          var hyphen = filter.indexOf('-');
+          filter = [filter.substring(0, hyphen), filter.substring(hyphen+1)]
           optUrl.push("filter[" + filter[0] + "][" + filter[1] + "]=" + filterValue);
         }
       } else if(param === "ids") {
