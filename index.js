@@ -20,7 +20,7 @@ var perform_request = function(url, resolve, reject){
       }
     }
 
-    if (response.statusCode === 200) {
+    if (response.statusCode == 200) {
       if (resolve) {
         return resolve({
           url: options.url,
@@ -42,22 +42,17 @@ var perform_request = function(url, resolve, reject){
 }
 
 var get = function(url, fields, opts, resolve, reject) {
-  if (opts == null) {
-    opts = false;
-  }
   url = config.endpoint + url + "/";
   if (opts) {
     var optUrl = [], filter, param;
     for (param in opts) {
       var paramValue = opts[param];
-      if (param === "filters") {
+      if (param == "filters") {
         for (filter in paramValue) {
-          var filterValue = paramValue[filter];
-          var hyphen = filter.indexOf('-');
-          filter = [filter.substring(0, hyphen), filter.substring(hyphen+1)]
-          optUrl.push("filter[" + filter[0] + "][" + filter[1] + "]=" + filterValue);
+          filter_split = filter.split('-')
+          optUrl.push("filter[" + filter_split[0] + "][" + filter_split[1] + "]=" + paramValue[filter]);
         }
-      } else if(param === "ids") {
+      } else if(param == "ids") {
         url += paramValue.join(',')
       } else {
         optUrl.push(param + "=" + paramValue);
