@@ -1,5 +1,5 @@
-var request = require('request');
-var config = require('./config');
+var request = require('request'),
+config = require('./config');
 
 var perform_request = function(url, resolve, reject){
 
@@ -46,7 +46,7 @@ var get = function(url, fields, opts, resolve, reject) {
       if (param == "filters") {
         for (filter in paramValue) {
           filter_split = filter.split('-')
-          optUrl.push("filter[" + filter_split[0] + "][" + filter_split[1] + "]=" + paramValue[filter]);
+          optUrl.push("filter[" + filter_split.join("][") + "]=" + paramValue[filter]);
         }
       } else if(param == "ids") {
         url += paramValue.join(',')
@@ -75,9 +75,9 @@ var endpoint = function(e){
 
 var endpoints = ["games", "companies", "people", "genres", "keywords", "platforms", "player_perspectives", "pulses", "themes", "franchises", "collections"],
 endpoints_obj = {
-  image: function(image_object, size = "thumb", filetype = "jpg"){
+  image: function(image_object, size, filetype){
     if(image_object){
-      return "https://res.cloudinary.com/igdb/image/upload/t_" + size + "/" + image_object.cloudinary_id + "." + filetype;
+      return "https://res.cloudinary.com/igdb/image/upload/t_" + (size || "thumb") + "/" + image_object.cloudinary_id + "." + (filetype || "jpg");
     }
   },
   scroll: function(url){
