@@ -1,0 +1,37 @@
+igdb = require('./index');
+
+function log(res){
+  for(i in res.body){
+    game = res.body[i];
+    game.cover = igdb.image(game.cover, "cover_small");
+  }
+  console.log(res.url, JSON.stringify(res.body, null, " "));
+}
+
+igdb.platforms({
+  search: "Atari",
+  limit: 2
+}, ["name"]).then(log);
+
+igdb.games({
+  search: "zelda",
+  limit: 5,
+  offset: 0,
+  order: "release_dates.date:desc",
+  filters: {
+    "release_dates.date-gt": "2010-12-31",
+    "release_dates.date-lt": "2012-01-01"
+  }
+}, ["name","release_dates.date","rating","hypes","cover"]).then(log);
+
+igdb.games({
+  ids: [18472, 18228],
+}, ["name", "cover"]).then(log);
+
+igdb.companies({
+  search: "rockstar",
+  limit: 5,
+  offset: 0,
+  order: "name:desc",
+  field: "name"
+}, ["name","logo"]).then(log);
