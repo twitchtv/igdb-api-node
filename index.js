@@ -77,7 +77,7 @@ var endpoints = ["games", "companies", "people", "genres", "keywords", "platform
 endpoints_obj = {
   image: function(image_object, size, filetype){
     if(image_object){
-      return "https://res.cloudinary.com/igdb/image/upload/t_" + (size || "thumb") + "/" + image_object.cloudinary_id + "." + (filetype || "jpg");
+      return "https://images.igdb.com/igdb/image/upload/t_" + (size || "thumb") + "/" + image_object.cloudinary_id + "." + (filetype || "jpg");
     }
   },
   scroll: function(url){
