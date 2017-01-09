@@ -16,8 +16,8 @@ Read more: https://market.mashape.com/igdbcom/internet-game-database/overview
 Setup
 -
 * `npm install igdb-api-node`
-* Rename `config.json.example` to `config.json` and edit settings.
 * `igdb = require('igdb-api-node')`
+* `global.mashapeKey = 'YOUR_KEY'` (alternatively use `process.env.mashapeKey`)
 
 Usage
 -

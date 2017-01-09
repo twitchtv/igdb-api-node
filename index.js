@@ -1,5 +1,4 @@
-var request = require('request'),
-config = require('./config');
+var request = require('request')
 
 var perform_request = function(url, resolve, reject){
 
@@ -7,7 +6,7 @@ var perform_request = function(url, resolve, reject){
     url: url,
     headers: {
       'Accept': 'application/json',
-      'X-Mashape-Key': config.apikey
+      'X-Mashape-Key': process.env.mashapeKey || global.mashapeKey || ''
     }
   };
 
@@ -38,7 +37,7 @@ var perform_request = function(url, resolve, reject){
 }
 
 var get = function(url, fields, opts, resolve, reject) {
-  url = config.endpoint + url + "/";
+  url = "https://igdbcom-internet-game-database-v1.p.mashape.com/" + url + "/";
   if (opts) {
     var optUrl = [], filter, param;
     for (param in opts) {
