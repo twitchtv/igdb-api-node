@@ -4,7 +4,9 @@
   "description": "Nodejs API Wrapper for IGDB.com",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "mocha",
+    "watch": "mocha -w",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +23,11 @@
   "bugs": {
     "url": "https://market.mashape.com/igdbcom/internet-game-database/support"
   },
-  "homepage": "https://market.mashape.com/igdbcom/internet-game-database/overview",
+  "homepage": "https://igdb.github.io/api/about/welcome/",
   "dependencies": {
     "request": "^2.60.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2"
   }
 }

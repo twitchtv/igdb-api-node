@@ -11,7 +11,7 @@ IGDB
 
 Nodejs Wrapper for IGDB.com API. Requires a Mashape.com API key.
 
-Read more: https://market.mashape.com/igdbcom/internet-game-database/overview
+Read more: https://igdb.github.io/api/about/welcome/
 
 Setup
 -
@@ -24,19 +24,19 @@ Usage
 
 **Games**
 
-* `games(opts)` Returns all games
+* `igdb.games(opts)` Returns all games
 ```javascript
 igdb.games({ limit: 5, offset: 15, fields: "*" }).then(output)
 ```
 
-* `games.get({ ids: [3766] })` Returns game information
+* `igdb.games({ ids: [3766] })` Returns game information
 ```javascript
 igdb.games({ ids: [3766], fields: "*" }).then(output)
 ```
 
 * `igdb.games({ search: "zelda", fields: "*" })`
 
-Read details on the search parameters here: https://market.mashape.com/igdbcom/internet-game-database/overview#wiki-filters
+Read details on the search parameters here: https://igdb.github.io/api/references/filters/
 
 ```javascript
 igdb.games({
@@ -52,12 +52,12 @@ igdb.games({
 
 **Companies**
 
-* `companies.index(opts).then(output)` Returns all companies
+* `igdb.companies(opts).then(output)` Returns all companies
 ```javascript
 igdb.companies({ limit: 5, offset: 15, fields: "*" }).then(output)
 ```
 
-* `companies.get(id, callback)` Returns game information
+* `igdb.companies(id, callback)` Returns game information
 ```javascript
 igdb.companies({ search: 'nintendo', fields: "*" }).then(output)
 ```
@@ -72,6 +72,6 @@ A handy image function is included to convert objects with cloudinary_ids to ful
 igdb.image(cover, "thumb", "jpg")
 ```
 
-More options are documented here: https://market.mashape.com/igdbcom/internet-game-database/overview#wiki-images
+More options are documented here: https://igdb.github.io/api/references/images/
 
 Also check out the sandbox.js file for more examples.
