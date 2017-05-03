@@ -72,7 +72,25 @@ var endpoint = function(e){
   }
 }
 
-var endpoints = ["games", "companies", "people", "genres", "keywords", "platforms", "player_perspectives", "pulses", "themes", "franchises", "collections"],
+var endpoints = [
+  "characters",
+  "games",
+  "feed",
+  "companies",
+  "people",
+  "genres",
+  "keywords",
+  "platforms",
+  "player_perspectives",
+  "pulses",
+  "themes",
+  "release_dates",
+  "franchises",
+  "collections",
+  "game_modes",
+  "pages",
+  "pulse_sources"
+],
 endpoints_obj = {
   image: function(image_object, size, filetype){
     if(image_object){
