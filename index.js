@@ -19,7 +19,7 @@ var perform_request = function(url, resolve, reject){
     if (error) {
       if(reject){
         return reject(error);
-      }else{
+      } else {
         throw error;
       }
     }
@@ -33,6 +33,7 @@ var perform_request = function(url, resolve, reject){
         scroll_count: response.headers['X-Count']
       });
     }
+
   });
 }
 
@@ -84,9 +85,11 @@ var endpoints = [
   "player_perspectives",
   "pulses",
   "themes",
+  "reviews",
   "release_dates",
   "franchises",
   "collections",
+  "game_engines",
   "game_modes",
   "pages",
   "pulse_sources"
