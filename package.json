@@ -83,5 +83,5 @@
     "start": "node lib/index.js | bunyan -L",
     "test": "babel-node ./node_modules/.bin/babel-istanbul test _mocha"
   },
-  "version": "2.0.4"
+  "version": "3.0.0"
 }
