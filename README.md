@@ -52,7 +52,7 @@ const client = igdb();
 
 All API endpoints are available as methods on the igdb-api-node client object. Each method has the following signature:
 
-#### client.endpoint(options, [fields])
+### client.endpoint(options, [fields])
 
 __Arguments__
 
@@ -103,7 +103,7 @@ The IGDB API documentation provides [details on search parameters](https://igdb.
 
 Mashape has [extensive documentation on the IGDB data entities](https://market.mashape.com/igdbcom/internet-game-database).
 
-#### client.image(imageObject, [size, [fileType]])
+### client.image(imageObject, [size, [fileType]])
 
 `igdb-api-node` provides handy image method for converting objects with `cloudinary_id` properties to full image URLs.
 
