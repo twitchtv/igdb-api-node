@@ -19,4 +19,4 @@ export default [
     'release_dates',
     'reviews',
     'themes'
-]
+];

@@ -1,6 +1,6 @@
 /* eslint no-process-env: 0 */
-import config from '../configuration'
-import request from 'request'
+import config from '../configuration';
+import request from 'request';
 
 /**
  * Sends a HTTP request to the provided URL.
@@ -16,14 +16,14 @@ export default (url, apiKey) => new Promise((resolve, reject) => {
             Accept: 'application/json'
         },
         url
-    }
+    };
 
     /*
     Expects the key header property to be set in configuration.js.
     If it's not set, default to 'X-Mashape-Key'
     */
     if (!config.api.keyHeader) {
-        config.api.keyHeader = 'X-Mashape-Key'
+        config.api.keyHeader = 'X-Mashape-Key';
     }
 
     /*
@@ -31,7 +31,7 @@ export default (url, apiKey) => new Promise((resolve, reject) => {
     process or global scope. The property to inspect is set in
     configuration.js as `globalProperty`.
     */
-    options.headers[config.api.keyHeader] = apiKey
+    options.headers[config.api.keyHeader] = apiKey;
 
     // Send the request to the API
     request(options, (error, response, body) => {
@@ -42,12 +42,12 @@ export default (url, apiKey) => new Promise((resolve, reject) => {
             */
             error = response.statusCode === 200 ?
                 null :
-                new Error(`HTTP Status ${response.statusCode} - ${options.url}`)
+                new Error(`HTTP Status ${response.statusCode} - ${options.url}`);
         }
 
         if (error) {
-            reject(error)
-            return
+            reject(error);
+            return;
         }
 
         try {
@@ -62,10 +62,10 @@ export default (url, apiKey) => new Promise((resolve, reject) => {
                 scrollCount: response.headers['X-Count'],
                 scrollUrl: response.headers['X-Next-Page'],
                 url: options.url
-            })
+            });
         } catch (error) {
             // JSON.parse() error
-            reject(error)
+            reject(error);
         }
-    })
-})
+    });
+});
