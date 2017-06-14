@@ -75,7 +75,7 @@
     "build": "BABEL_ENV=build babel js -d lib",
     "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover _mocha --report lcovonly -- -R spec",
     "lint": "node_modules/.bin/eslint js",
-    "posttest": "npm run coverage",
+    "posttest": "[ -z \"$npm_config_coverage\" ] || babel-istanbul check-coverage --branches 80 --functions 80 --lines 80 --statements 80",
     "prepare": "npm run build",
     "prepublishOnly": "npm run securityCheck && npm test --coverage",
     "pretest": "npm run lint",

@@ -2,4 +2,6 @@ language: node_js
 node_js:
   - "node"
 after_success:
-  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
+    - npm run coverage
+    - ./node_modules/.bin/coveralls < ./coverage/lcov.info
+    - rm -rf ./coverage
