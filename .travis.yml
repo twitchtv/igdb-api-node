@@ -1,6 +1,7 @@
 language: node_js
 node_js:
-  - "node"
+  - "6"
+  - "8"
 after_success:
     - npm run coverage
     - ./node_modules/.bin/coveralls < ./coverage/lcov.info
