@@ -1,4 +1,4 @@
-import requestEndpoint from './request-endpoint';
+import requestEndpoint from './request-endpoint'
 
 /**
  * Transforms an endpoint name into a Function that performs a request to that endpoint.
@@ -13,7 +13,7 @@ export default (endpoint, apiKey) => {
      * @arg {Array} [fields]
      * @returns {Promise<Object>}
      */
-    const endpointFunction = (options, fields) => requestEndpoint(endpoint, options, fields, apiKey);
+    const endpointFunction = (options, fields) => requestEndpoint(endpoint, options, fields, apiKey)
 
-    return endpointFunction;
-};
+    return endpointFunction
+}

@@ -17,8 +17,8 @@
  */
 export default (imageObject, size, fileType) => {
     if (!imageObject) {
-        throw new Error('No image object recieved');
+        throw new Error('No image object recieved')
     }
 
-    return `https://images.igdb.com/igdb/image/upload/t_${(size || 'thumb')}/${imageObject.cloudinary_id}.${(fileType || 'jpg')}`;
-};
+    return `https://images.igdb.com/igdb/image/upload/t_${(size || 'thumb')}/${imageObject.cloudinary_id}.${(fileType || 'jpg')}`
+}

@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/igdb/igdb-api-node.svg?branch=master)](https://travis-ci.org/igdb/igdb-api-node)
+[![Coverage Status](https://coveralls.io/repos/github/igdb/igdb-api-node/badge.svg?branch=master)](https://coveralls.io/github/igdb/igdb-api-node?branch=master)
 
 # igdb-api-node
 
