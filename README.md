@@ -183,7 +183,7 @@ client.companies({
     limit: 5,
     offset: 0,
     order: 'name:desc',
-    search: 'rockstart'
+    search: 'rockstar'
 }, [
     'name',
     'logo'
