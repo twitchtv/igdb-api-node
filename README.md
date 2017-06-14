@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/igdb/igdb-api-node.svg?branch=master)](https://travis-ci.org/igdb/igdb-api-node)
 [![Coverage Status](https://coveralls.io/repos/github/igdb/igdb-api-node/badge.svg?branch=master)](https://coveralls.io/github/igdb/igdb-api-node?branch=master)
+[![NPM Version](https://img.shields.io/npm/v/igdb-api-node.svg)](https://www.npmjs.com/package/igdb-api-node)
+[![Downloads](https://img.shields.io/npm/dm/igdb-api-node.svg)](https://www.npmjs.com/package/igdb-api-node)
 
 # igdb-api-node
 
