@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/igdb/igdb-api-node.svg?branch=master)](https://travis-ci.org/igdb/igdb-api-node)
+
 # igdb-api-node
 
 A Node.js wrapper for the IGDB.com Free Video Game Database API.
