@@ -13,6 +13,7 @@ export default [
     'people',
     'platforms',
     'player_perspectives',
+    'pulse_groups',
     'pulse_sources',
     'pulses',
     'release_dates',

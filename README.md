@@ -9,7 +9,7 @@ A Node.js wrapper for the IGDB.com Free Video Game Database API.
 ## About IGDB
 One of the principles behind IGDB.com is accessibility of data. We wish to share the data with anyone who wants to build cool videogame oriented websites, apps and services. This means that the information you contribute to IGDB.com can be used by other projects as well.
 
-Thus, you are not only contributing to the value of this site but to hundreds of other projects as well. We are looking forward to see what exciting game related projects you come up with. Happy coding!
+Thus, you are not only contributing to the value of this site but to thousands of other projects as well. We are looking forward to see what exciting game related projects you come up with. Happy coding!
 
 More info here:
 * [About the API](https://www.igdb.com/api)
@@ -80,27 +80,7 @@ client.games({
 });
 ```
 
-The available endpoints are:
-
-* 'characters'
-* 'collections'
-* 'companies'
-* 'feed'
-* 'franchises'
-* 'game_engines'
-* 'game_modes'
-* 'games'
-* 'genres'
-* 'keywords'
-* 'pages'
-* 'people'
-* 'platforms'
-* 'player_perspectives'
-* 'pulse_sources'
-* 'pulses'
-* 'release_dates'
-* 'reviews'
-* 'themes'
+The available endpoints are [available here](https://igdb.github.io/api/endpoints/).
 
 The IGDB API documentation provides [details on search parameters](https://igdb.github.io/api/references/filters/).
 
