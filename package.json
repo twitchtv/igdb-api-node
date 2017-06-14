@@ -1,33 +1,87 @@
 {
-  "name": "igdb-api-node",
-  "version": "2.0.4",
-  "description": "Nodejs API Wrapper for IGDB.com",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha",
-    "watch": "mocha -w",
-    "start": "node index.js"
+  "author": "Jake Cattral <krazyjakee@gmail.com>",
+  "babel": {
+    "comments": false,
+    "plugins": [
+      "transform-line",
+      "transform-runtime"
+    ],
+    "presets": [
+      "env"
+    ],
+    "sourceMaps": "inline"
   },
+  "bugs": {
+    "url": "https://market.mashape.com/igdbcom/internet-game-database/support"
+  },
+  "contributors": [
+    "Duane Sibilly <duane@sibilly.com>",
+    "Sharpless512 <mahoney_be@hotmail.com>"
+  ],
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "request": "^2.60.0"
+  },
+  "description": "Nodejs API Wrapper for IGDB.com",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-istanbul": "^0.12.2",
+    "babel-plugin-transform-line": "^0.3.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "chai": "^4.0.2",
+    "eslint": "^4.0.0",
+    "eslint-config-isotropic": "^0.5.0",
+    "mocha": "^3.4.2",
+    "nock": "^9.0.13",
+    "nsp": "^2.6.3",
+    "pre-commit": "^1.2.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "mocha": true,
+      "node": true
+    },
+    "extends": "isotropic",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "experimentalObjectRestSpread": true,
+        "globalReturn": false,
+        "impliedStrict": true,
+        "jsx": false
+      },
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+    },
+    "root": true
+  },
+  "homepage": "https://igdb.github.io/api/about/welcome/",
+  "keywords": [
+    "api",
+    "games",
+    "igdb",
+    "wrapper"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "name": "igdb-api-node",
   "repository": {
     "type": "git",
     "url": "https://github.com/igdb/igdb-api-node.git"
   },
-  "keywords": [
-    "igdb",
-    "games",
-    "api",
-    "wrapper"
-  ],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://market.mashape.com/igdbcom/internet-game-database/support"
+  "scripts": {
+    "build": "BABEL_ENV=build babel js -d lib",
+    "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover _mocha --report lcovonly -- -R spec",
+    "lint": "node_modules/.bin/eslint js",
+    "posttest": "[ -z \"$npm_config_coverage\" ] || babel-istanbul check-coverage --branches 80 --functions 80 --lines 80 --statements 80",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run securityCheck && npm test --coverage",
+    "pretest": "npm run lint",
+    "rebuild": "rm -rf ./node_modules && npm install",
+    "securityCheck": "nsp check",
+    "start": "node lib/index.js | bunyan -L",
+    "test": "babel-node ./node_modules/.bin/babel-istanbul test _mocha"
   },
-  "homepage": "https://igdb.github.io/api/about/welcome/",
-  "dependencies": {
-    "request": "^2.60.0"
-  },
-  "devDependencies": {
-    "mocha": "^3.1.2"
-  }
+  "version": "2.0.4"
 }

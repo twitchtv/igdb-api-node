@@ -1,0 +1,21 @@
+export default [
+    'characters',
+    'collections',
+    'companies',
+    'feed',
+    'franchises',
+    'game_engines',
+    'game_modes',
+    'games',
+    'genres',
+    'keywords',
+    'pages',
+    'people',
+    'platforms',
+    'player_perspectives',
+    'pulse_sources',
+    'pulses',
+    'release_dates',
+    'reviews',
+    'themes'
+];
