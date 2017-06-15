@@ -47,15 +47,16 @@ describe('request-endpoint', () => {
                 'X-Mashape-Key': headerValue => headerValue
             }
         }).get('/games/').query({
-            fields: 'id,name'
+            fields: 'id,name',
+            limit: 1
         }).reply(200, _response);
 
         return igdb(configuration.api.key).games({
-            fields: [
-                'id',
-                'name'
-            ]
-        }).then(response => {
+            limit: 1
+        }, [
+            'id',
+            'name'
+        ]).then(response => {
             expect(response.body).to.eql(_response);
         });
     });
