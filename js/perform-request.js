@@ -1,6 +1,6 @@
 /* eslint no-process-env: 0 */
 import config from '../configuration';
-import request from 'request';
+import request from './request-promise';
 
 /**
  * Sends a HTTP request to the provided URL.
@@ -10,7 +10,7 @@ import request from 'request';
  * @example
  * performRequest('http://example.com/api/v1/exampleEndpoint', 'example-api-key-123').then(console.log)
  */
-export default (url, apiKey) => new Promise((resolve, reject) => {
+export default (url, apiKey) => {
     const options = {
         headers: {
             Accept: 'application/json'
@@ -34,19 +34,9 @@ export default (url, apiKey) => new Promise((resolve, reject) => {
     options.headers[config.api.keyHeader] = apiKey;
 
     // Send the request to the API
-    request(options, (error, response, body) => {
-        if (!error) {
-            /*
-            Even if there is no error from the request itself, there
-            might still be an HTTP error in the response.
-            */
-            error = response.statusCode === 200 ?
-                null :
-                new Error(`HTTP Status ${response.statusCode} - ${options.url}`);
-        }
-
-        if (error) {
-            reject(error);
+    return request(options).then(result => new Promise((resolve, reject) => {
+        if (result.response.statusCode !== 200) {
+            reject(new Error(`HTTP Status ${result.response.statusCode} - ${options.url}`));
             return;
         }
 
@@ -57,15 +47,15 @@ export default (url, apiKey) => new Promise((resolve, reject) => {
             and it throws an Error.
             */
             resolve({
-                body: JSON.parse(body),
-                headers: response.headers,
-                scrollCount: response.headers['X-Count'],
-                scrollUrl: response.headers['X-Next-Page'],
+                body: JSON.parse(result.body),
+                headers: result.response.headers,
+                scrollCount: result.response.headers['x-count'] || result.response.headers['X-Count'],
+                scrollUrl: result.response.headers['x-next-page'] || result.response.headers['X-Next-Page'],
                 url: options.url
             });
         } catch (error) {
             // JSON.parse() error
             reject(error);
         }
-    });
-});
+    }));
+};

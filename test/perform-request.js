@@ -51,4 +51,20 @@ describe('perform-request', () => {
             expect(error).to.be.an.instanceOf(Error).with.property('message', 'HTTP Status 404 - http://example.com/api/v1/exampleEndpoint');
         });
     });
+
+    it('should return a rejected Promise if the URI provides malformed JSON', () => {
+        nock('http://example.com/api/v1', {
+            reqheaders: {
+                Accept: 'application/json',
+                'X-Mashape-Key': headerValue => {
+                    expect(headerValue).to.equal('example-api-key-123');
+                    return headerValue;
+                }
+            }
+        }).get('/exampleEndpoint').reply(200, 'this-is-not-json');
+
+        return performRequest('http://example.com/api/v1/exampleEndpoint', 'example-api-key-123').catch(error => {
+            expect(error).to.be.an.instanceOf(Error).with.property('message', 'Unexpected token h in JSON at position 1');
+        });
+    });
 });

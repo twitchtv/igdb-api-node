@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "babel-runtime": "^6.23.0",
+    "presage": "^0.1.4",
     "request": "^2.60.0"
   },
   "description": "Nodejs API Wrapper for IGDB.com",
