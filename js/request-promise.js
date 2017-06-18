@@ -1,6 +1,11 @@
 import presage from 'presage';
 import request from 'request';
 
+/**
+ * A Promise-based wrapper for `request`.
+ * @arg {string} url An HTTP url.
+ * @returns {Promise<Object>} An object containing the response object and response body.
+ */
 export default url => {
     const {
         callbackFunction,
