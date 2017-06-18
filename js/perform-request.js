@@ -47,10 +47,10 @@ export default (url, apiKey) => {
             and it throws an Error.
             */
             resolve({
-                body: JSON.parse(body),
-                headers: response.headers,
-                scrollCount: response.headers['X-Count'],
-                scrollUrl: response.headers['X-Next-Page'],
+                body: JSON.parse(result.body),
+                headers: result.response.headers,
+                scrollCount: result.response.headers['x-count'] || result.response.headers['X-Count'],
+                scrollUrl: result.response.headers['x-next-page'] || result.response.headers['X-Next Page'],
                 url: options.url
             });
         } catch (error) {
