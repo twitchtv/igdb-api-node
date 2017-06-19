@@ -67,4 +67,54 @@ describe('perform-request', () => {
             expect(error).to.be.an.instanceOf(Error).with.property('message', 'Unexpected token h in JSON at position 1');
         });
     });
+
+    it('should provide a scroll method on the response object when scrolling is possible', () => {
+        const _igdbApiUrl = 'http://example.com/api/v1',
+            gamesUrl = `${_igdbApiUrl}/games/?order=rating&scroll=1`,
+            scrollUrl = `${_igdbApiUrl}/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=`;
+
+        nock(_igdbApiUrl, {
+            reqheaders: {
+                Accept: 'application/json',
+                'X-Mashape-Key': headerValue => {
+                    expect(headerValue).to.equal('example-api-key-123');
+                    return headerValue;
+                }
+            }
+        }).get('/games/').query({
+            order: 'rating',
+            scroll: 1
+        }).reply(200, {
+            gamesResponse: true
+        }, {
+            'X-Count': 1337,
+            'X-Next-Page': scrollUrl
+        });
+
+        return performRequest(gamesUrl, 'example-api-key-123').then(response => {
+            expect(response.body).to.eql({
+                gamesResponse: true
+            });
+            expect(response.scrollCount).to.equal(1337);
+            expect(response.scrollUrl).to.equal(scrollUrl);
+
+            nock(_igdbApiUrl, {
+                reqheaders: {
+                    Accept: 'application/json',
+                    'X-Mashape-Key': headerValue => {
+                        expect(headerValue).to.equal('example-api-key-123');
+                        return headerValue;
+                    }
+                }
+            }).get('/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=').reply(200, {
+                scrollResponse: true
+            });
+
+            return response.scroll();
+        }).then(scrollResponse => {
+            expect(scrollResponse.body).to.eql({
+                scrollResponse: true
+            });
+        });
+    });
 });

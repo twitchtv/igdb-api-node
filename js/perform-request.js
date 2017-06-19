@@ -1,4 +1,3 @@
-/* eslint no-process-env: 0 */
 import config from '../configuration';
 import request from './request-promise';
 
@@ -10,7 +9,7 @@ import request from './request-promise';
  * @example
  * performRequest('http://example.com/api/v1/exampleEndpoint', 'example-api-key-123').then(console.log)
  */
-export default (url, apiKey) => {
+const performRequest = (url, apiKey) => {
     const options = {
         headers: {
             Accept: 'application/json'
@@ -46,16 +45,29 @@ export default (url, apiKey) => {
             try-catch block just in case the string is malformed
             and it throws an Error.
             */
-            resolve({
-                body: JSON.parse(result.body),
-                headers: result.response.headers,
-                scrollCount: result.response.headers['x-count'] || result.response.headers['X-Count'],
-                scrollUrl: result.response.headers['x-next-page'] || result.response.headers['X-Next-Page'],
-                url: options.url
-            });
+            const {
+                body,
+                response
+            } = result,
+                responseObj = {
+                    body: JSON.parse(body),
+                    headers: response.headers,
+                    scrollCount: response.headers['x-count'] || response.headers['X-Count'],
+                    scrollUrl: response.headers['x-next-page'] || response.headers['X-Next-Page'],
+                    url: options.url
+                };
+
+            // Add a scroll method to the response object if applicable.
+            if (responseObj.scrollUrl) {
+                responseObj.scroll = () => performRequest(responseObj.scrollUrl, apiKey);
+            }
+
+            resolve(responseObj);
         } catch (error) {
             // JSON.parse() error
             reject(error);
         }
     }));
 };
+
+export default performRequest;
