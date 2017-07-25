@@ -36,6 +36,10 @@ export default (endpoint, options, fields, apiKey) => {
                     url.baseUrl += parameterValue.join(',');
                     break;
 
+                case 'expand':
+                    url.options.push(`expand=${parameterValue.join(',')}`);
+                    break;
+
                 default:
                     url.options.push(`${parameter}=${parameterValue}`);
             }
