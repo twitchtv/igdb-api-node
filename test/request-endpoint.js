@@ -121,7 +121,7 @@ describe('request-endpoint', () => {
         });
     });
 
-    /* it('should create requests for expanded entities', () => {
+    it('should create requests for expanded entities', () => {
         const _response = {
             exampleResponse: true
         };
@@ -132,15 +132,20 @@ describe('request-endpoint', () => {
                 'X-Mashape-Key': headerValue => headerValue
             }
         }).get('/games/').query({
-            fields: ['name', 'genres.name'],
-            expand: ['genres']
+            fields: 'name,genres.name',
+            expand: 'genres'
         }).reply(200, _response);
 
         return igdb(configuration.mashape.key).games({
-            fields: ['name', 'genres.name'],
-            expand: ['genres']
+            fields: [
+                'name',
+                'genres.name'
+            ],
+            expand: [
+                'genres'
+            ]
         }).then(response => {
             expect(response.body).to.eql(_response);
         });
-    });*/
+    });
 });
