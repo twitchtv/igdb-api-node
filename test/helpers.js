@@ -48,7 +48,7 @@ describe('Helper Methods', () => {
     });
 
     describe('client.scroll', () => {
-        it('should retrive next page of results via scrollUrl and client.scroll', () => {
+        it('should retrive next page of results via scrollUrl and client.scroll (DEPRECATED v3.1.0)', () => {
             nock(igdbApiUrl, {
                 reqheaders: {
                     Accept: 'application/json',

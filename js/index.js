@@ -1,4 +1,4 @@
-/* eslint no-process-env: 0 */
+/* eslint no-process-env: 0, no-console: 0 */
 import config from '../configuration';
 import endpoints from './endpoints';
 import getImage from './get-image';
@@ -19,7 +19,16 @@ export default apiKey => endpoints.reduce((endpointObj, endpoint) => {
     return endpointObj;
 }, {
     image: getImage,
-    scroll: url => performRequest(url, apiKey)
+    /**
+     * Performs a client request on an arbitrary URL. Intended for use with scrolling paginated results.
+     * @arg {string} url
+     * @returns {Promise<Object>}
+     * @deprecated since version 3.1.0
+     */
+    scroll: url => {
+        console.log('The client.scroll function is deprecated and will be removed in v4.0.0');
+        return performRequest(url, apiKey);
+    }
 });
 
 export {
