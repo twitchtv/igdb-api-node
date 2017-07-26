@@ -11,7 +11,7 @@ import configuration from '../configuration';
 import igdb from '../js/index';
 import nock from 'nock';
 
-configuration.mashape.key = configuration.mashape.key;
+configuration.mashape.key = 'example-api-key-123';
 
 describe('Helper Methods', () => {
     describe('client.image', () => {
