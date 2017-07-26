@@ -10,17 +10,37 @@ import performRequest from './perform-request';
  * @arg {string} [apiKey]
  * @returns {Object}
  */
-export default apiKey => endpoints.reduce((endpointObj, endpoint) => {
-    if (!apiKey) {
-        apiKey = process.env[config.api.globalProperty] || global[config.api.globalProperty] || '';
+export default apiKey => {
+    let apiService = config.mashape;
+
+    if (apiKey) {
+        switch (apiKey.length) {
+            case 32:
+                apiService = config.threeScale;
+                break;
+            default:
+                apiService = config.mashape;
+        }
+        apiService.key = apiKey;
+    } else {
+        Object.keys(config).forEach(api => {
+            api = config[api];
+            apiKey = process.env[api.globalProperty] || global[api.globalProperty] || '';
+            if (apiKey) {
+                apiService = api;
+                apiService.key = apiKey;
+            }
+        });
     }
 
-    endpointObj[endpoint] = parseEndpoint(endpoint, apiKey);
-    return endpointObj;
-}, {
-    image: getImage,
-    scroll: url => performRequest(url, apiKey)
-});
+    return endpoints.reduce((endpointObj, endpoint) => {
+        endpointObj[endpoint] = parseEndpoint(endpoint, apiService);
+        return endpointObj;
+    }, {
+        image: getImage,
+        scroll: url => performRequest(url, apiService)
+    });
+};
 
 export {
     config

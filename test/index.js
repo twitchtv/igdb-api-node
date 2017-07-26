@@ -11,13 +11,9 @@ import configuration from '../configuration';
 import igdb from '../js/index';
 import nock from 'nock';
 
-const igdbApiUrl = 'https://igdbcom-internet-game-database-v1.p.mashape.com';
-
-configuration.api.key = 'example-api-key-123';
-
 describe('client', () => {
     it('should fall back to an empty string API key if no key is configured or available in process or global scope', () => {
-        nock(igdbApiUrl, {
+        nock(configuration.mashape.url, {
             reqheaders: {
                 Accept: 'application/json'
             }
@@ -37,7 +33,7 @@ describe('client', () => {
     it('should fall back to global-scope API key property if no key is configured and no process-scope property is set', () => {
         global.mashapeKey = 'example-api-key-123';
 
-        nock(igdbApiUrl, {
+        nock(configuration.mashape.url, {
             reqheaders: {
                 Accept: 'application/json',
                 'X-Mashape-Key': headerValue => {
@@ -63,7 +59,7 @@ describe('client', () => {
     it('should fall back to process-scope API key property if no key is configured', () => {
         process.env.mashapeKey = 'example-api-key-123';
 
-        nock(igdbApiUrl, {
+        nock(configuration.mashape.url, {
             reqheaders: {
                 Accept: 'application/json',
                 'X-Mashape-Key': headerValue => {

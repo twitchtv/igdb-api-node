@@ -11,8 +11,8 @@ import configuration from '../configuration';
 import igdb from '../js/index';
 import nock from 'nock';
 
-const apiShould = 'should make the correct HTTP request to IGDB based on passed arguments',
-    igdbApiUrl = 'https://igdbcom-internet-game-database-v1.p.mashape.com';
+configuration.mashape.key = 'example-api-key-123';
+const apiShould = 'should make the correct HTTP request to IGDB based on passed arguments';
 
 describe('API endpoints', () => {
     describe('characters', () => {
@@ -48,7 +48,7 @@ describe('API endpoints', () => {
                 }
             ];
 
-            nock(igdbApiUrl, {
+            nock(configuration.mashape.url, {
                 reqheaders: {
                     Accept: 'application/json',
                     'X-Mashape-Key': headerValue => headerValue
@@ -58,7 +58,7 @@ describe('API endpoints', () => {
                 limit: 2
             }).reply(200, _response);
 
-            return igdb(configuration.api.key).characters({
+            return igdb(configuration.mashape.key).characters({
                 fields: '*',
                 limit: 2
             }).then(response => {
@@ -132,7 +132,7 @@ describe('API endpoints', () => {
                 }
             ];
 
-            nock(igdbApiUrl, {
+            nock(configuration.mashape.url, {
                 reqheaders: {
                     Accept: 'application/json',
                     'X-Mashape-Key': headerValue => headerValue
@@ -141,7 +141,7 @@ describe('API endpoints', () => {
                 fields: '*'
             }).reply(200, _response);
 
-            return igdb(configuration.api.key).collections({
+            return igdb(configuration.mashape.key).collections({
                 fields: '*'
             }).then(response => {
                 expect(response.body).to.eql(_response);
@@ -168,7 +168,7 @@ describe('API endpoints', () => {
                 }
             ];
 
-            nock(igdbApiUrl, {
+            nock(configuration.mashape.url, {
                 reqheaders: {
                     Accept: 'application/json',
                     'X-Mashape-Key': headerValue => headerValue
@@ -179,7 +179,7 @@ describe('API endpoints', () => {
                 limit: 1
             }).reply(200, _response);
 
-            return igdb(configuration.api.key).companies({
+            return igdb(configuration.mashape.key).companies({
                 fields: '*',
                 offset: 0,
                 limit: 1
