@@ -44,15 +44,15 @@ export default (endpoint, options, fields, apiKey) => {
                     url.options.push(`${parameter}=${parameterValue}`);
             }
 
-            if (fields) {
-                url.options.push(`fields=${fields.join(',')}`);
-            }
-
             return url;
         }, {
             baseUrl: url,
             options: []
         });
+
+        if (fields) {
+            url.options.push(`fields=${fields.join(',')}`);
+        }
 
         url = `${url.baseUrl}?${url.options.join('&')}`;
     }
