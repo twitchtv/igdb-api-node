@@ -4,6 +4,13 @@ node_js:
   - "6"
   - "8"
 after_success:
+<<<<<<< HEAD
     - npm run coverage
     - ./node_modules/.bin/coveralls < ./coverage/lcov.info
     - rm -rf ./coverage
+=======
+  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
+cache:
+  directories:
+    - node_modules
+>>>>>>> master
