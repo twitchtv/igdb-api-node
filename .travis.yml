@@ -3,3 +3,6 @@ node_js:
   - "node"
 after_success:
   - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
+cache:
+  directories:
+    - node_modules
