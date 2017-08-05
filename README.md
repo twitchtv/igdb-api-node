@@ -39,7 +39,7 @@ import igdb from 'igdb-api-node';
 
 #### Using your API key
 
-* Pass your API key directly:
+* Pass your mashape OR igdb API key directly:
 ```javascript
 const client = igdb('YOUR_API_KEY');
 ```
@@ -50,6 +50,12 @@ $ mashapeKey='YOUR_API_KEY' node yourCode.js
 * Set a global-scope variable:
 ```javascript
 global.mashapeKey = 'YOUR_API_KEY';
+const client = igdb();
+```
+
+If you signed up at api.igdb.com you can use the following global key...
+```javascript
+global['3scaleKey'] = 'YOUR_API_KEY';
 const client = igdb();
 ```
 
@@ -183,7 +189,7 @@ client.companies({
     limit: 5,
     offset: 0,
     order: 'name:desc',
-    search: 'rockstart'
+    search: 'rockstar'
 }, [
     'name',
     'logo'

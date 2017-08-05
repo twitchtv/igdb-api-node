@@ -1,4 +1,3 @@
-import config from '../configuration';
 import performRequest from './perform-request';
 
 /**
@@ -6,17 +5,17 @@ import performRequest from './perform-request';
  * @arg {string} endpoint
  * @arg {Object} [options]
  * @arg {Array} [fields]
- * @arg {string} [apiKey]
+ * @arg {object} [apiService]
  * @returns {Promise<Object>}
  * @example
  * requestEndpoint('example', { fields: '*', limit: 10 }, ['id', 'name'], 'example-api-key-123').then(console.log)
  */
-export default (endpoint, options, fields, apiKey) => {
+export default (endpoint, options, fields, apiService) => {
     if (!endpoint) {
         return Promise.reject(new Error('No API endpoint provided'));
     }
 
-    let url = `${config.api.url}/${endpoint}/`;
+    let url = `${apiService.url}/${endpoint}/`;
 
     if (options) {
         url = Object.keys(options).reduce((url, parameter) => {
@@ -36,6 +35,10 @@ export default (endpoint, options, fields, apiKey) => {
                     url.baseUrl += parameterValue.join(',');
                     break;
 
+                case 'expand':
+                    url.options.push(`expand=${parameterValue.join(',')}`);
+                    break;
+
                 default:
                     url.options.push(`${parameter}=${parameterValue}`);
             }
@@ -53,5 +56,5 @@ export default (endpoint, options, fields, apiKey) => {
         url = `${url.baseUrl}?${url.options.join('&')}`;
     }
 
-    return performRequest(url, apiKey);
+    return performRequest(url, apiService);
 };
