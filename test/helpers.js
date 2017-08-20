@@ -50,6 +50,12 @@ describe('Helper Methods', () => {
         });
     });
 
+    describe('client.tagNumber', () => {
+        it('should generate a tag number', () => {
+            expect(igdb().tagNumber(1, 5)).to.equal(268435461);
+        });
+    });
+
     describe('client.scroll', () => {
         it('should retrive next page of results via scrollUrl and client.scroll', () => {
             nock(configuration.mashape.url, {
