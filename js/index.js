@@ -2,6 +2,7 @@
 import config from '../configuration';
 import endpoints from './endpoints';
 import getImage from './get-image';
+import getScrollAll from './scroll-all';
 import parseEndpoint from './parse-endpoint';
 import performRequest from './perform-request';
 
@@ -38,7 +39,8 @@ export default apiKey => {
         return endpointObj;
     }, {
         image: getImage,
-        scroll: url => performRequest(url, apiService)
+        scroll: url => performRequest(url, apiService),
+        scrollAll: (url, options) => getScrollAll(url, options, apiService, performRequest)
     });
 };
 

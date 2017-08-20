@@ -2,6 +2,7 @@ export default [
     'characters',
     'collections',
     'companies',
+    'credits',
     'feed',
     'franchises',
     'game_engines',
@@ -18,5 +19,6 @@ export default [
     'pulses',
     'release_dates',
     'reviews',
-    'themes'
+    'themes',
+    'titles'
 ];
