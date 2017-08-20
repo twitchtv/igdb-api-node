@@ -126,6 +126,28 @@ client.image({
 
 More image options are available in the [IGDB API documentation](https://igdb.github.io/api/references/images/).
 
+### client.tagNumber(category, id)
+
+`igdb-api-node` provides handy method for generating [tag numbers](https://igdb.github.io/api/misc-objects/tagnumbers/) when doing advanced filtering.
+
+__Arguments__
+
+* `category` - An integer representing the tag category (game, genre, theme)
+* `id` - The ID of the category entity
+
+__Example__
+```javascript
+import igdb from 'igdb-api-node';
+
+const client = igdb('YOUR_API_KEY'),
+    category = 1, // Genre
+    id = 5; // Shooter
+    
+client.tagNumber(1, 5); // 268435461
+```
+
+More tag number options and information are available in the [IGDB API documentation](https://igdb.github.io/api/misc-objects/tagnumbers/).
+
 ## More examples
 
 ```javascript
