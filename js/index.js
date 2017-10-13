@@ -10,6 +10,7 @@ import performRequest from './perform-request';
 /**
  * Creates the IGDB API object, populated with methods for all defined endpoints.
  * @arg {string} [apiKey]
+ * @arg {bool} [staging]
  * @returns {Object}
  */
 export default (apiKey, staging) => {
