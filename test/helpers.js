@@ -13,7 +13,7 @@ import nock from 'nock';
 
 configuration.mashape.key = 'example-api-key-123';
 
-const xNextPage = `${configuration.mashape.url}/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=`;
+const xNextPage = '/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=';
 
 describe('Helper Methods', () => {
     describe('client.image', () => {

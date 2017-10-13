@@ -41,7 +41,7 @@ export default apiKey => {
     }, {
         image: getImage,
         tagNumber: getTagNumber,
-        scroll: url => performRequest(url, apiService),
+        scroll: url => performRequest(`${apiService.url}${url}`, apiService),
         scrollAll: (url, options) => getScrollAll(url, options, apiService, performRequest)
     });
 };
