@@ -12,16 +12,18 @@ import performRequest from './perform-request';
  * @arg {string} [apiKey]
  * @returns {Object}
  */
-export default apiKey => {
+export default (apiKey, staging) => {
     let apiService = config.mashape;
 
     if (apiKey) {
-        switch (apiKey.length) {
-            case 32:
+        apiService = config.mashape;
+
+        if (apiKey.length === 32) {
+            if (staging) {
+                apiService = config.threeScaleStaging;
+            } else {
                 apiService = config.threeScale;
-                break;
-            default:
-                apiService = config.mashape;
+            }
         }
         apiService.key = apiKey;
     } else {

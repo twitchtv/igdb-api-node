@@ -8,5 +8,10 @@ module.exports = {
         globalProperty: '3scaleKey',
         keyHeader: 'user-key',
         url: 'https://api-2445582011268.apicast.io'
+    },
+    threeScaleStaging: {
+        globalProperty: '3scaleKeyStaging',
+        keyHeader: 'user-key',
+        url: 'https://api-2445582011268.staging.apicast.io'
     }
 };
