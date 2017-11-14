@@ -2,6 +2,7 @@ export default [
     'characters',
     'collections',
     'companies',
+    'credits',
     'feed',
     'franchises',
     'game_engines',

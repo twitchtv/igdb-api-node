@@ -13,6 +13,8 @@ import nock from 'nock';
 
 configuration.mashape.key = 'example-api-key-123';
 
+const xNextPage = '/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=';
+
 describe('Helper Methods', () => {
     describe('client.image', () => {
         it('should generate an image URL', () => {
@@ -48,6 +50,12 @@ describe('Helper Methods', () => {
         });
     });
 
+    describe('client.tagNumber', () => {
+        it('should generate a tag number', () => {
+            expect(igdb().tagNumber(1, 5)).to.equal(268435461);
+        });
+    });
+
     describe('client.scroll', () => {
         it('should retrive next page of results via scrollUrl and client.scroll', () => {
             nock(configuration.mashape.url, {
@@ -63,7 +71,7 @@ describe('Helper Methods', () => {
                 scroll: 1
             }).reply(200, {}, {
                 'X-Count': 1337,
-                'X-Next-Page': `${configuration.mashape.url}/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=`
+                'X-Next-Page': xNextPage
             });
 
             return igdb(configuration.mashape.key).games({
@@ -72,7 +80,7 @@ describe('Helper Methods', () => {
             }).then(response => {
                 expect(response.body).to.eql({});
                 expect(response.scrollCount).to.equal(1337);
-                expect(response.scrollUrl).to.equal(`${configuration.mashape.url}/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=`);
+                expect(response.scrollUrl).to.equal(xNextPage);
 
                 nock(`${configuration.mashape.url}`, {
                     reqheaders: {
@@ -84,9 +92,45 @@ describe('Helper Methods', () => {
                     }
                 }).get('/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=').reply(200, {});
 
-                return igdb(configuration.mashape.key).scroll(`${configuration.mashape.url}/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=`);
+                return igdb(configuration.mashape.key).scroll(xNextPage);
             }).then(response => {
                 expect(response.body).to.eql({});
+            });
+        });
+    });
+
+    describe('client.scrollAll', () => {
+        it('should retrieve all pages and concatinate results into a single array', () => {
+            nock(configuration.mashape.url, {
+                reqheaders: {
+                    Accept: 'application/json',
+                    'X-Mashape-Key': headerValue => {
+                        expect(headerValue).to.equal(configuration.mashape.key);
+                        return headerValue;
+                    }
+                }
+            }).get('/games/').reply(200, [1], {
+                'X-Count': 2,
+                'X-Next-Page': xNextPage
+            });
+
+            nock(configuration.mashape.url, {
+                reqheaders: {
+                    Accept: 'application/json',
+                    'X-Mashape-Key': headerValue => {
+                        expect(headerValue).to.equal(configuration.mashape.key);
+                        return headerValue;
+                    }
+                }
+            }).get('/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=').reply(200, [2], {
+                'X-Count': 2,
+                'X-Next-Page': xNextPage
+            });
+
+            return igdb(configuration.mashape.key).scrollAll('/games/', {
+                interval: 0
+            }).then(response => {
+                expect(response).to.eql([1, 2]);
             });
         });
     });
