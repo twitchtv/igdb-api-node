@@ -19,8 +19,7 @@ export default [
     'pulses',
     'release_dates',
     'reviews',
-    'social_metrics',
-    'social_metric_sources',
     'themes',
-    'titles'
+    'social_metrics',
+    'social_metric_sources'
 ];
