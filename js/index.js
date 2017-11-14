@@ -2,24 +2,29 @@
 import config from '../configuration';
 import endpoints from './endpoints';
 import getImage from './get-image';
+import getScrollAll from './scroll-all';
+import getTagNumber from './tag-number';
 import parseEndpoint from './parse-endpoint';
 import performRequest from './perform-request';
 
 /**
  * Creates the IGDB API object, populated with methods for all defined endpoints.
  * @arg {string} [apiKey]
+ * @arg {bool} [staging]
  * @returns {Object}
  */
-export default apiKey => {
+export default (apiKey, staging) => {
     let apiService = config.mashape;
 
     if (apiKey) {
-        switch (apiKey.length) {
-            case 32:
+        apiService = config.mashape;
+
+        if (apiKey.length === 32) {
+            if (staging) {
+                apiService = config.threeScaleStaging;
+            } else {
                 apiService = config.threeScale;
-                break;
-            default:
-                apiService = config.mashape;
+            }
         }
         apiService.key = apiKey;
     } else {
@@ -38,7 +43,9 @@ export default apiKey => {
         return endpointObj;
     }, {
         image: getImage,
-        scroll: url => performRequest(url, apiService)
+        tagNumber: getTagNumber,
+        scroll: url => performRequest(`${apiService.url}${url}`, apiService),
+        scrollAll: (url, options) => getScrollAll(url, options, apiService, performRequest)
     });
 };
 
