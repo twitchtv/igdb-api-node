@@ -3,7 +3,7 @@ export default [
     'collections',
     'companies',
     'credits',
-    'feed',
+    'feeds',
     'franchises',
     'game_engines',
     'game_modes',
