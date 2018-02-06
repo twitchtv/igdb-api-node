@@ -19,6 +19,7 @@
     "@babel/register": "^7.0.0-beta.39",
     "babel-plugin-istanbul": "^4.1.5",
     "chai": "^4.0.2",
+    "coveralls": "^3.0.0",
     "cross-env": "^5.1.3",
     "eslint": "^4.0.0",
     "eslint-config-isotropic": "^0.5.0",
@@ -45,6 +46,7 @@
   "scripts": {
     "build": "babel js -d lib",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --compilers js:@babel/register",
+    "publishCoverage": "coveralls < ./coverage/lcov.info",
     "lint": "eslint js",
     "posttest": "[ -z \"$npm_config_coverage\" ] || nyc check-coverage --branches 80 --functions 80 --lines 80 --statements 80",
     "prepare": "npm run build",
