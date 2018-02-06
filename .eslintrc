@@ -1,0 +1,23 @@
+{
+    "env": {
+        "es6": true,
+        "mocha": true,
+        "node": true
+    },
+    "extends": "isotropic",
+    "parserOptions": {
+        "ecmaFeatures": {
+        "experimentalObjectRestSpread": true,
+        "globalReturn": false,
+        "impliedStrict": true,
+        "jsx": false
+        },
+        "ecmaVersion": 2017,
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-bitwise": "off",
+        "no-debugger": "off"
+    },
+    "root": true
+}

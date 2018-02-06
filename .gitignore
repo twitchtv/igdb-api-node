@@ -2,5 +2,5 @@ coverage
 lib
 node_modules
 sandbox.js
-
 package-lock.json
+.nyc_output

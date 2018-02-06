@@ -13,7 +13,7 @@ import nock from 'nock';
 
 describe('client', () => {
     it('should fall back to an empty string API key if no key is configured or available in process or global scope', () => {
-        nock(configuration.mashape.url, {
+        nock(configuration.threeScale.url, {
             reqheaders: {
                 Accept: 'application/json'
             }
@@ -31,12 +31,12 @@ describe('client', () => {
     });
 
     it('should fall back to global-scope API key property if no key is configured and no process-scope property is set', () => {
-        global.mashapeKey = 'example-api-key-123';
+        global['3scaleKey'] = 'example-api-key-123';
 
-        nock(configuration.mashape.url, {
+        nock(configuration.threeScale.url, {
             reqheaders: {
                 Accept: 'application/json',
-                'X-Mashape-Key': headerValue => {
+                'user-key': headerValue => {
                     expect(headerValue).to.equal('example-api-key-123');
                     return headerValue;
                 }
@@ -53,16 +53,16 @@ describe('client', () => {
             expect(response.body).to.eql({});
         });
 
-        delete global.mashapeKey;
+        delete global['3scaleKey'];
     });
 
     it('should fall back to process-scope API key property if no key is configured', () => {
-        process.env.mashapeKey = 'example-api-key-123';
+        process.env['3scaleKey'] = 'example-api-key-123';
 
-        nock(configuration.mashape.url, {
+        nock(configuration.threeScale.url, {
             reqheaders: {
                 Accept: 'application/json',
-                'X-Mashape-Key': headerValue => {
+                'user-key': headerValue => {
                     expect(headerValue).to.equal('example-api-key-123');
                     return headerValue;
                 }
@@ -79,6 +79,6 @@ describe('client', () => {
             expect(response.body).to.eql({});
         });
 
-        delete process.env.mashapeKey;
+        delete process.env['3scaleKey'];
     });
 });
