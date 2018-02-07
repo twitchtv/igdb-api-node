@@ -39,23 +39,19 @@ import igdb from 'igdb-api-node';
 
 #### Using your API key
 
-* Pass your mashape OR igdb API key directly:
+* Pass API key directly:
 ```javascript
 const client = igdb('YOUR_API_KEY');
 ```
-* Set a process environment variable:
+
+* OR set a process environment variable:
 ```bash
-$ mashapeKey='YOUR_API_KEY' node yourCode.js
-```
-* Set a global-scope variable:
-```javascript
-global.mashapeKey = 'YOUR_API_KEY';
-const client = igdb();
+$ IGDB_API_KEY='YOUR_API_KEY' node yourCode.js
 ```
 
-If you signed up at api.igdb.com you can use the following global key...
+* OR set a global-scope variable:
 ```javascript
-global['3scaleKey'] = 'YOUR_API_KEY';
+global.IGDB_API_KEY = 'YOUR_API_KEY';
 const client = igdb();
 ```
 
@@ -88,11 +84,9 @@ client.games({
 });
 ```
 
-The available endpoints are [available here](https://igdb.github.io/api/endpoints/).
+The available endpoints are [documented and available here](https://igdb.github.io/api/endpoints/).
 
 The IGDB API documentation provides [details on search parameters](https://igdb.github.io/api/references/filters/).
-
-Mashape has [extensive documentation on the IGDB data entities](https://market.mashape.com/igdbcom/internet-game-database).
 
 ### client.image(imageObject, [size, [fileType]])
 
@@ -128,7 +122,7 @@ More image options are available in the [IGDB API documentation](https://igdb.gi
 
 ### client.tagNumber(category, id)
 
-`igdb-api-node` provides handy method for generating [tag numbers](https://igdb.github.io/api/misc-objects/tagnumbers/) when doing advanced filtering.
+`igdb-api-node` provides handy method for generating [tag numbers](https://igdb.github.io/api/references/tag-numbers/) when doing advanced filtering.
 
 __Arguments__
 
@@ -146,7 +140,7 @@ const client = igdb('YOUR_API_KEY'),
 client.tagNumber(1, 5); // 268435461
 ```
 
-More tag number options and information are available in the [IGDB API documentation](https://igdb.github.io/api/misc-objects/tagnumbers/).
+More tag number options and information are available in the [IGDB API documentation](https://igdb.github.io/api/references/tag-numbers/).
 
 ## More examples
 
@@ -216,4 +210,12 @@ client.companies({
     'name',
     'logo'
 ]).then(log);
+```
+
+```javascript
+// Grab all results using scroll API
+igdb(apiKey).scrollAll('/games/?fields=name&filter[genre][eq]=7&limit=50') // Pass URL
+.then(response => {
+    // response = Array of all game objects
+});
 ```

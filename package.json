@@ -1,65 +1,33 @@
 {
   "author": "Jake Cattral <krazyjakee@gmail.com>",
-  "babel": {
-    "comments": false,
-    "plugins": [
-      "transform-line",
-      "transform-runtime"
-    ],
-    "presets": [
-      "env"
-    ],
-    "sourceMaps": "inline"
-  },
   "bugs": {
-    "url": "https://market.mashape.com/igdbcom/internet-game-database/support"
+    "url": "https://igdb.github.io/api/about/welcome/#need-support"
   },
   "contributors": [
     "Duane Sibilly <duane@sibilly.com>",
     "Sharpless512 <mahoney_be@hotmail.com>"
   ],
   "dependencies": {
-    "babel-runtime": "^6.23.0",
     "presage": "^0.1.4",
     "request": "^2.60.0"
   },
-  "description": "Nodejs API Wrapper for IGDB.com",
+  "description": "Nodejs API Wrapper for the IGDB.com API",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-istanbul": "^0.12.2",
-    "babel-plugin-transform-line": "^0.3.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
+    "@babel/cli": "^7.0.0-beta.39",
+    "@babel/core": "^7.0.0-beta.39",
+    "@babel/preset-env": "^7.0.0-beta.39",
+    "@babel/register": "^7.0.0-beta.39",
+    "babel-plugin-istanbul": "^4.1.5",
     "chai": "^4.0.2",
-    "coveralls": "^2.13.1",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.1.3",
     "eslint": "^4.0.0",
     "eslint-config-isotropic": "^0.5.0",
     "mocha": "^3.4.2",
     "nock": "^9.0.13",
     "nsp": "^2.6.3",
+    "nyc": "^11.4.1",
     "pre-commit": "^1.2.2"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "mocha": true,
-      "node": true
-    },
-    "extends": "isotropic",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "experimentalObjectRestSpread": true,
-        "globalReturn": false,
-        "impliedStrict": true,
-        "jsx": false
-      },
-      "ecmaVersion": 2017,
-      "sourceType": "module"
-    },
-    "rules": {
-      "no-bitwise": "off"
-    },
-    "root": true
   },
   "homepage": "https://igdb.github.io/api/about/welcome/",
   "keywords": [
@@ -76,17 +44,19 @@
     "url": "https://github.com/igdb/igdb-api-node.git"
   },
   "scripts": {
-    "build": "BABEL_ENV=build babel js -d lib",
-    "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover _mocha --report lcovonly -- -R spec",
-    "lint": "node_modules/.bin/eslint js",
-    "posttest": "[ -z \"$npm_config_coverage\" ] || babel-istanbul check-coverage --branches 80 --functions 80 --lines 80 --statements 80",
+    "build": "babel js -d lib",
+    "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --compilers js:@babel/register",
+    "publishCoverage": "coveralls < ./coverage/lcov.info",
+    "lint": "eslint js",
+    "posttest": "[ -z \"$npm_config_coverage\" ] || nyc check-coverage --branches 80 --functions 80 --lines 80 --statements 80",
     "prepare": "npm run build",
     "prepublishOnly": "npm run securityCheck && npm test --coverage",
     "pretest": "npm run lint",
     "rebuild": "rm -rf ./node_modules && npm install",
     "securityCheck": "nsp check",
     "start": "node lib/index.js | bunyan -L",
-    "test": "babel-node ./node_modules/.bin/babel-istanbul test _mocha"
+    "test": "mocha --compilers js:@babel/register",
+    "testDebug": "mocha --inspect-brk --compilers js:@babel/register"
   },
-  "version": "3.1.1"
+  "version": "3.1.2"
 }

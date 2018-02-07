@@ -13,30 +13,10 @@ import performRequest from './perform-request';
  * @arg {bool} [staging]
  * @returns {Object}
  */
-export default (apiKey, staging) => {
-    let apiService = config.mashape;
+export default apiKey => {
+    const apiService = config.threeScale;
 
-    if (apiKey) {
-        apiService = config.mashape;
-
-        if (apiKey.length === 32) {
-            if (staging) {
-                apiService = config.threeScaleStaging;
-            } else {
-                apiService = config.threeScale;
-            }
-        }
-        apiService.key = apiKey;
-    } else {
-        Object.keys(config).forEach(api => {
-            api = config[api];
-            apiKey = process.env[api.globalProperty] || global[api.globalProperty] || '';
-            if (apiKey) {
-                apiService = api;
-                apiService.key = apiKey;
-            }
-        });
-    }
+    apiService.key = apiKey || process.env.IGDB_API_KEY || process.env['3scaleKey'] || process.env.mashapeKey || global.IGDB_API_KEY || global['3scaleKey'] || global.mashapeKey;
 
     return endpoints.reduce((endpointObj, endpoint) => {
         endpointObj[endpoint] = parseEndpoint(endpoint, apiService);

@@ -11,7 +11,7 @@ import configuration from '../configuration';
 import igdb from '../js/index';
 import nock from 'nock';
 
-configuration.mashape.key = 'example-api-key-123';
+configuration.threeScale.key = 'example-api-key-123';
 const apiShould = 'should make the correct HTTP request to IGDB based on passed arguments';
 
 describe('API endpoints', () => {
@@ -48,17 +48,17 @@ describe('API endpoints', () => {
                 }
             ];
 
-            nock(configuration.mashape.url, {
+            nock(configuration.threeScale.url, {
                 reqheaders: {
                     Accept: 'application/json',
-                    'X-Mashape-Key': headerValue => headerValue
+                    'user-key': headerValue => headerValue
                 }
             }).get('/characters/').query({
                 fields: '*',
                 limit: 2
             }).reply(200, _response);
 
-            return igdb(configuration.mashape.key).characters({
+            return igdb(configuration.threeScale.key).characters({
                 fields: '*',
                 limit: 2
             }).then(response => {
@@ -132,16 +132,16 @@ describe('API endpoints', () => {
                 }
             ];
 
-            nock(configuration.mashape.url, {
+            nock(configuration.threeScale.url, {
                 reqheaders: {
                     Accept: 'application/json',
-                    'X-Mashape-Key': headerValue => headerValue
+                    'user-key': headerValue => headerValue
                 }
             }).get('/collections/').query({
                 fields: '*'
             }).reply(200, _response);
 
-            return igdb(configuration.mashape.key).collections({
+            return igdb(configuration.threeScale.key).collections({
                 fields: '*'
             }).then(response => {
                 expect(response.body).to.eql(_response);
@@ -168,10 +168,10 @@ describe('API endpoints', () => {
                 }
             ];
 
-            nock(configuration.mashape.url, {
+            nock(configuration.threeScale.url, {
                 reqheaders: {
                     Accept: 'application/json',
-                    'X-Mashape-Key': headerValue => headerValue
+                    'user-key': headerValue => headerValue
                 }
             }).get('/companies/').query({
                 fields: '*',
@@ -179,7 +179,7 @@ describe('API endpoints', () => {
                 limit: 1
             }).reply(200, _response);
 
-            return igdb(configuration.mashape.key).companies({
+            return igdb(configuration.threeScale.key).companies({
                 fields: '*',
                 offset: 0,
                 limit: 1
