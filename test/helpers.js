@@ -11,7 +11,7 @@ import configuration from '../configuration';
 import igdb from '../js/index';
 import nock from 'nock';
 
-configuration.mashape.key = 'example-api-key-123';
+const apiKey = 'example-api-key-123';
 
 const xNextPage = '/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=';
 
@@ -57,12 +57,12 @@ describe('Helper Methods', () => {
     });
 
     describe('client.scroll', () => {
-        it('should retrive next page of results via scrollUrl and client.scroll', () => {
-            nock(configuration.mashape.url, {
+        it('should retrieve next page of results via scrollUrl and client.scroll', () => {
+            nock(configuration.threeScale.url, {
                 reqheaders: {
                     Accept: 'application/json',
-                    'X-Mashape-Key': headerValue => {
-                        expect(headerValue).to.equal(configuration.mashape.key);
+                    'user-key': headerValue => {
+                        expect(headerValue).to.equal(apiKey);
                         return headerValue;
                     }
                 }
@@ -70,11 +70,11 @@ describe('Helper Methods', () => {
                 order: 'rating',
                 scroll: 1
             }).reply(200, {}, {
-                'X-Count': 1337,
-                'X-Next-Page': xNextPage
+                'x-count': 1337,
+                'x-next-page': xNextPage
             });
 
-            return igdb(configuration.mashape.key).games({
+            return igdb(apiKey).games({
                 order: 'rating',
                 scroll: 1
             }).then(response => {
@@ -82,17 +82,17 @@ describe('Helper Methods', () => {
                 expect(response.scrollCount).to.equal(1337);
                 expect(response.scrollUrl).to.equal(xNextPage);
 
-                nock(`${configuration.mashape.url}`, {
+                nock(configuration.threeScale.url, {
                     reqheaders: {
                         Accept: 'application/json',
-                        'X-Mashape-Key': headerValue => {
-                            expect(headerValue).to.equal(configuration.mashape.key);
+                        'user-key': headerValue => {
+                            expect(headerValue).to.equal(apiKey);
                             return headerValue;
                         }
                     }
-                }).get('/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=').reply(200, {});
+                }).get(xNextPage).reply(200, {});
 
-                return igdb(configuration.mashape.key).scroll(xNextPage);
+                return igdb(apiKey).scroll(xNextPage);
             }).then(response => {
                 expect(response.body).to.eql({});
             });
@@ -101,11 +101,11 @@ describe('Helper Methods', () => {
 
     describe('client.scrollAll', () => {
         it('should retrieve all pages and concatinate results into a single array', () => {
-            nock(configuration.mashape.url, {
+            nock(configuration.threeScale.url, {
                 reqheaders: {
                     Accept: 'application/json',
-                    'X-Mashape-Key': headerValue => {
-                        expect(headerValue).to.equal(configuration.mashape.key);
+                    'user-key': headerValue => {
+                        expect(headerValue).to.equal(apiKey);
                         return headerValue;
                     }
                 }
@@ -114,20 +114,20 @@ describe('Helper Methods', () => {
                 'X-Next-Page': xNextPage
             });
 
-            nock(configuration.mashape.url, {
+            nock(configuration.threeScale.url, {
                 reqheaders: {
                     Accept: 'application/json',
-                    'X-Mashape-Key': headerValue => {
-                        expect(headerValue).to.equal(configuration.mashape.key);
+                    'user-key': headerValue => {
+                        expect(headerValue).to.equal(apiKey);
                         return headerValue;
                     }
                 }
-            }).get('/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=').reply(200, [2], {
+            }).get(xNextPage).reply(200, [2], {
                 'X-Count': 2,
                 'X-Next-Page': xNextPage
             });
 
-            return igdb(configuration.mashape.key).scrollAll('/games/', {
+            return igdb(apiKey).scrollAll('/games/', {
                 interval: 0
             }).then(response => {
                 expect(response).to.eql([1, 2]);

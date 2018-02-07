@@ -39,6 +39,16 @@ export default (endpoint, options, fields, apiService) => {
                     url.options.push(`expand=${parameterValue.join(',')}`);
                     break;
 
+                case 'limit': {
+                    const limit = parseInt(parameterValue, 10);
+
+                    if (limit > 50) {
+                        url.baseUrl += 'pro/';
+                    }
+                    url.options.push(`${parameter}=${parameterValue}`);
+                    break;
+                }
+
                 default:
                     url.options.push(`${parameter}=${parameterValue}`);
             }

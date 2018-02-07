@@ -12,7 +12,7 @@ import igdb from '../js/index';
 import nock from 'nock';
 import requestEndpoint from '../js/request-endpoint';
 
-configuration.mashape.key = 'example-api-key-123';
+configuration.threeScale.key = 'example-api-key-123';
 
 describe('request-endpoint', () => {
     it('should return a rejected Promise if no endpoint is provided', () => requestEndpoint().catch(error => {
@@ -24,14 +24,14 @@ describe('request-endpoint', () => {
             exampleResponse: true
         };
 
-        nock(configuration.mashape.url, {
+        nock(configuration.threeScale.url, {
             reqheaders: {
                 Accept: 'application/json',
-                'X-Mashape-Key': headerValue => headerValue
+                'user-key': headerValue => headerValue
             }
         }).get('/characters/').reply(200, _response);
 
-        return igdb(configuration.mashape.key).characters().then(response => {
+        return igdb(configuration.threeScale.key).characters().then(response => {
             expect(response.body).to.eql(_response);
         });
     });
@@ -41,17 +41,17 @@ describe('request-endpoint', () => {
             exampleResponse: true
         };
 
-        nock(configuration.mashape.url, {
+        nock(configuration.threeScale.url, {
             reqheaders: {
                 Accept: 'application/json',
-                'X-Mashape-Key': headerValue => headerValue
+                'user-key': headerValue => headerValue
             }
         }).get('/games/').query({
             fields: 'id,name',
             limit: 1
         }).reply(200, _response);
 
-        return igdb(configuration.mashape.key).games({
+        return igdb(configuration.threeScale.key).games({
             limit: 1
         }, [
             'id',
@@ -66,10 +66,10 @@ describe('request-endpoint', () => {
             exampleResponse: true
         };
 
-        nock(configuration.mashape.url, {
+        nock(configuration.threeScale.url, {
             reqheaders: {
                 Accept: 'application/json',
-                'X-Mashape-Key': headerValue => headerValue
+                'user-key': headerValue => headerValue
             }
         }).get('/games/').query({
             fields: '*',
@@ -83,7 +83,7 @@ describe('request-endpoint', () => {
             search: 'penguin'
         }).reply(200, _response);
 
-        return igdb(configuration.mashape.key).games({
+        return igdb(configuration.threeScale.key).games({
             fields: '*',
             filters: {
                 'platforms-eq': 3
@@ -101,16 +101,16 @@ describe('request-endpoint', () => {
             exampleResponse: true
         };
 
-        nock(configuration.mashape.url, {
+        nock(configuration.threeScale.url, {
             reqheaders: {
                 Accept: 'application/json',
-                'X-Mashape-Key': headerValue => headerValue
+                'user-key': headerValue => headerValue
             }
         }).get('/games/3766,3767').query({
             fields: '*'
         }).reply(200, _response);
 
-        return igdb(configuration.mashape.key).games({
+        return igdb(configuration.threeScale.key).games({
             fields: '*',
             ids: [
                 3766,
@@ -126,17 +126,17 @@ describe('request-endpoint', () => {
             exampleResponse: true
         };
 
-        nock(configuration.mashape.url, {
+        nock(configuration.threeScale.url, {
             reqheaders: {
                 Accept: 'application/json',
-                'X-Mashape-Key': headerValue => headerValue
+                'user-key': headerValue => headerValue
             }
         }).get('/games/').query({
             fields: 'name,genres.name',
             expand: 'genres'
         }).reply(200, _response);
 
-        return igdb(configuration.mashape.key).games({
+        return igdb(configuration.threeScale.key).games({
             fields: [
                 'name',
                 'genres.name'
@@ -146,6 +146,27 @@ describe('request-endpoint', () => {
             ]
         }).then(response => {
             expect(response.body).to.eql(_response);
+        });
+    });
+
+    it('should change the url path if limit is above 50', () => {
+        const _response = {
+            exampleResponse: true
+        };
+
+        nock(configuration.threeScale.url, {
+            reqheaders: {
+                Accept: 'application/json',
+                'user-key': headerValue => headerValue
+            }
+        }).get('/games/pro/').query({
+            limit: 51
+        }).reply(200, _response);
+
+        return igdb(configuration.threeScale.key).games({
+            limit: 51
+        }).then(response => {
+            expect(response.url).to.contain('/pro/');
         });
     });
 });

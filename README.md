@@ -39,23 +39,19 @@ import igdb from 'igdb-api-node';
 
 #### Using your API key
 
-* Pass your mashape OR igdb API key directly:
+* Pass API key directly:
 ```javascript
 const client = igdb('YOUR_API_KEY');
 ```
-* Set a process environment variable:
+
+* OR set a process environment variable:
 ```bash
-$ mashapeKey='YOUR_API_KEY' node yourCode.js
-```
-* Set a global-scope variable:
-```javascript
-global.mashapeKey = 'YOUR_API_KEY';
-const client = igdb();
+$ IGDB_API_KEY='YOUR_API_KEY' node yourCode.js
 ```
 
-If you signed up at api.igdb.com you can use the following global key...
+* OR set a global-scope variable:
 ```javascript
-global['3scaleKey'] = 'YOUR_API_KEY';
+global.IGDB_API_KEY = 'YOUR_API_KEY';
 const client = igdb();
 ```
 
@@ -88,11 +84,9 @@ client.games({
 });
 ```
 
-The available endpoints are [available here](https://igdb.github.io/api/endpoints/).
+The available endpoints are [documented and available here](https://igdb.github.io/api/endpoints/).
 
 The IGDB API documentation provides [details on search parameters](https://igdb.github.io/api/references/filters/).
-
-Mashape has [extensive documentation on the IGDB data entities](https://market.mashape.com/igdbcom/internet-game-database).
 
 ### client.image(imageObject, [size, [fileType]])
 
