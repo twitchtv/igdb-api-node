@@ -122,7 +122,7 @@ More image options are available in the [IGDB API documentation](https://igdb.gi
 
 ### client.tagNumber(category, id)
 
-`igdb-api-node` provides handy method for generating [tag numbers](https://igdb.github.io/api/misc-objects/tagnumbers/) when doing advanced filtering.
+`igdb-api-node` provides handy method for generating [tag numbers](https://igdb.github.io/api/references/tag-numbers/) when doing advanced filtering.
 
 __Arguments__
 
@@ -140,7 +140,7 @@ const client = igdb('YOUR_API_KEY'),
 client.tagNumber(1, 5); // 268435461
 ```
 
-More tag number options and information are available in the [IGDB API documentation](https://igdb.github.io/api/misc-objects/tagnumbers/).
+More tag number options and information are available in the [IGDB API documentation](https://igdb.github.io/api/references/tag-numbers/).
 
 ## More examples
 
@@ -210,4 +210,12 @@ client.companies({
     'name',
     'logo'
 ]).then(log);
+```
+
+```javascript
+// Grab all results using scroll API
+igdb(apiKey).scrollAll('/games/?fields=name&filter[genre][eq]=7&limit=50') // Pass URL
+.then(response => {
+    // response = Array of all game objects
+});
 ```
