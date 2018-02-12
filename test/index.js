@@ -1,13 +1,6 @@
-import {
-    describe,
-    it
-} from 'mocha';
-
-import {
-    expect
-} from 'chai';
-
+import {describe, it} from 'mocha';
 import configuration from '../configuration';
+import {expect} from 'chai';
 import igdb from '../js/index';
 import nock from 'nock';
 

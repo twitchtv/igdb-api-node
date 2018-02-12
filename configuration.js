@@ -1,7 +1,7 @@
-export default {
+module.exports = {
     threeScale: {
         globalProperty: '3scaleKey',
         keyHeader: 'user-key',
-        url: 'https://api-2445582011268.production.gw.apicast.io'
+        url: 'https://api-endpoint.igdb.com'
     }
 };
