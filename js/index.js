@@ -5,6 +5,7 @@ import getImage from './get-image';
 import getScrollAll from './scroll-all';
 import getTagNumber from './tag-number';
 import parseEndpoint from './parse-endpoint';
+import parsePrivateEndpoint from './parse-private-endpoint';
 import performRequest from './perform-request';
 
 /**
@@ -22,6 +23,7 @@ export default apiKey => {
         endpointObj[endpoint] = parseEndpoint(endpoint, apiService);
         return endpointObj;
     }, {
+        private: parsePrivateEndpoint('private', apiService),
         image: getImage,
         tagNumber: getTagNumber,
         scroll: url => performRequest(`${apiService.url}${url}`, apiService),

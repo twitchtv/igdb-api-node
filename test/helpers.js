@@ -3,17 +3,16 @@ import {
     it
 } from 'mocha';
 
+import configuration from '../configuration';
 import {
     expect
 } from 'chai';
 
-import configuration from '../configuration';
 import igdb from '../js/index';
 import nock from 'nock';
 
-const apiKey = 'example-api-key-123';
-
-const xNextPage = '/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=';
+const apiKey = 'example-api-key-123',
+    xNextPage = '/games/scroll/cXVlcnlBbmRGZXRjaDsxOzE5OkhBck1wUUZsUnpPUDgwMGtDN0hSdEE7MDs=';
 
 describe('Helper Methods', () => {
     describe('client.image', () => {

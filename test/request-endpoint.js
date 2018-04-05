@@ -3,11 +3,11 @@ import {
     it
 } from 'mocha';
 
+import configuration from '../configuration';
 import {
     expect
 } from 'chai';
 
-import configuration from '../configuration';
 import igdb from '../js/index';
 import nock from 'nock';
 import requestEndpoint from '../js/request-endpoint';

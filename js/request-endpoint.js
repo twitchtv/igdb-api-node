@@ -49,6 +49,16 @@ export default (endpoint, options, fields, apiService) => {
                     break;
                 }
 
+                case 'endpoint': {
+                    url.baseUrl += `${parameterValue}/`;
+                    break;
+                }
+
+                case 'token': {
+                    apiService.token = parameterValue;
+                    break;
+                }
+
                 default:
                     url.options.push(`${parameter}=${parameterValue}`);
             }
@@ -63,7 +73,11 @@ export default (endpoint, options, fields, apiService) => {
             url.options.push(`fields=${fields.join(',')}`);
         }
 
-        url = `${url.baseUrl}?${url.options.join('&')}`;
+        if (url.options.length) {
+            url = `${url.baseUrl}?${url.options.join('&')}`;
+        } else {
+            url = url.baseUrl;
+        }
     }
 
     return performRequest(url, apiService);

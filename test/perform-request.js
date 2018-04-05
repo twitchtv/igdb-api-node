@@ -3,11 +3,11 @@ import {
     it
 } from 'mocha';
 
+import configuration from '../configuration';
 import {
     expect
 } from 'chai';
 
-import configuration from '../configuration';
 import nock from 'nock';
 import performRequest from '../js/perform-request';
 

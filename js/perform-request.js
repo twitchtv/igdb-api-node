@@ -17,6 +17,10 @@ export default (url, apiService) => {
         url
     };
 
+    if (apiService.token) {
+        options.headers.Authorization = `Bearer ${apiService.token}`;
+    }
+
     /*
     If no API key is provided to the function, look for the key in the
     process or global scope. The property to inspect is set in
