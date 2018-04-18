@@ -18,6 +18,9 @@ export default (endpoint, options, fields, apiService) => {
     let url = `${apiService.url}/${endpoint}/`;
 
     if (options) {
+        if (options.limit && options.limit > 50) {
+            url = `${apiService.url}/pro/${endpoint}/`;
+        }
         url = Object.keys(options).reduce((url, parameter) => {
             const parameterValue = options[parameter];
 
@@ -38,16 +41,6 @@ export default (endpoint, options, fields, apiService) => {
                 case 'expand':
                     url.options.push(`expand=${parameterValue.join(',')}`);
                     break;
-
-                case 'limit': {
-                    const limit = parseInt(parameterValue, 10);
-
-                    if (limit > 50) {
-                        url.baseUrl += 'pro/';
-                    }
-                    url.options.push(`${parameter}=${parameterValue}`);
-                    break;
-                }
 
                 case 'endpoint': {
                     url.baseUrl += `${parameterValue}/`;

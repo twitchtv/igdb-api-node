@@ -159,14 +159,14 @@ describe('request-endpoint', () => {
                 Accept: 'application/json',
                 'user-key': headerValue => headerValue
             }
-        }).get('/games/pro/').query({
+        }).get('/pro/games/').query({
             limit: 51
         }).reply(200, _response);
 
         return igdb(configuration.threeScale.key).games({
             limit: 51
         }).then(response => {
-            expect(response.url).to.contain('/pro/');
+            expect(response.url).to.contain('/pro/games/');
         });
     });
 });

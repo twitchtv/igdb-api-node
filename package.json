@@ -1,4 +1,19 @@
 {
+  "name": "igdb-api-node",
+  "version": "3.1.4",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igdb/igdb-api-node.git"
+  },
+  "homepage": "https://igdb.github.io/api/about/welcome/",
+  "keywords": [
+    "api",
+    "games",
+    "igdb",
+    "wrapper"
+  ],
   "author": "Jake Cattral <krazyjakee@gmail.com>",
   "bugs": {
     "url": "https://igdb.github.io/api/about/welcome/#need-support"
@@ -29,20 +44,6 @@
     "nyc": "^11.4.1",
     "pre-commit": "^1.2.2"
   },
-  "homepage": "https://igdb.github.io/api/about/welcome/",
-  "keywords": [
-    "api",
-    "games",
-    "igdb",
-    "wrapper"
-  ],
-  "license": "MIT",
-  "main": "lib/index.js",
-  "name": "igdb-api-node",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/igdb/igdb-api-node.git"
-  },
   "scripts": {
     "build": "babel js -d lib",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --compilers js:@babel/register",
@@ -57,6 +58,5 @@
     "start": "node lib/index.js | bunyan -L",
     "test": "mocha --compilers js:@babel/register",
     "testDebug": "mocha --inspect-brk --compilers js:@babel/register"
-  },
-  "version": "3.1.3"
+  }
 }
