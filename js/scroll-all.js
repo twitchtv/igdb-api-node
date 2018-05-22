@@ -25,7 +25,7 @@ export default (url, options, apiService, request) => new Promise((accept, rejec
     }
 
     options = Object.assign({}, {
-        interval: 200
+        interval: 500
     }, options);
 
     let results = [],
@@ -69,8 +69,12 @@ export default (url, options, apiService, request) => new Promise((accept, rejec
 
                     // If there's only one page of results or some other error
                     if (response.body && !response.body.length) {
-                        return accept2();
+                        first = false;
+                        maxPages = currentPage;
+                        accept2();
+                        return;
                     }
+
                     results = results.concat(response.body);
                     setTimeout(() => accept2(), options.interval);
                 }).catch(reject2);
