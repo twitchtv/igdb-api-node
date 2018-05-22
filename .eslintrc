@@ -17,7 +17,8 @@
     },
     "rules": {
         "no-bitwise": "off",
-        "no-debugger": "off"
+        "no-debugger": "off",
+        "one-var": "off"
     },
     "root": true
 }

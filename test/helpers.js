@@ -108,7 +108,7 @@ describe('Helper Methods', () => {
                         return headerValue;
                     }
                 }
-            }).get('/games/').reply(200, [1], {
+            }).get('/games/?scroll=1').reply(200, [1], {
                 'X-Count': 2,
                 'X-Next-Page': xNextPage
             });
@@ -126,7 +126,7 @@ describe('Helper Methods', () => {
                 'X-Next-Page': xNextPage
             });
 
-            return igdb(apiKey).scrollAll('/games/', {
+            return igdb(apiKey).scrollAll('/games/?scroll=1', {
                 interval: 0
             }).then(response => {
                 expect(response).to.eql([1, 2]);

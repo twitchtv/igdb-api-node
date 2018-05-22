@@ -1,3 +1,5 @@
+import {addScrollParameter} from './utilities';
+
 const promiseWhile = (condition, execute) => new Promise((resolve, reject) => {
     const iterate = () => {
         if (condition()) {
@@ -23,6 +25,9 @@ export default (url, options, apiService, request) => new Promise((accept, rejec
     if (!url) {
         reject(new Error('No url provided for scrollAll'));
     }
+
+    // Ensure url has scroll=1
+    const newUrl = addScrollParameter(url);
 
     options = Object.assign({}, {
         interval: 500
@@ -53,7 +58,7 @@ export default (url, options, apiService, request) => new Promise((accept, rejec
             return true;
         },
         () => new Promise((accept2, reject2) => {
-            request(`${apiService.url}${xNextPage || url}`, apiService)
+            request(`${apiService.url}${xNextPage || newUrl}`, apiService)
                 .then(response => {
                     if (first) {
                         first = false;
