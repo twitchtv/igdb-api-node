@@ -1,4 +1,6 @@
-import {URL} from 'url';
+import {
+    URL
+} from 'url';
 
 const addScrollParameter = path => {
     const testUrl = new URL(`http://x.x${path}`);

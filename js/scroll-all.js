@@ -1,4 +1,6 @@
-import {addScrollParameter} from './utilities';
+import {
+    addScrollParameter
+} from './utilities';
 
 const promiseWhile = (condition, execute) => new Promise((resolve, reject) => {
     const iterate = () => {
