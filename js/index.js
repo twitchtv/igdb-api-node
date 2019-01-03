@@ -1,36 +1,29 @@
-/* eslint no-process-env: 0 */
-import config from '../configuration';
-import endpoints from './endpoints';
-import getImage from './get-image';
-import getScrollAll from './scroll-all';
+import apicalypse from 'apicalypse';
 import getTagNumber from './tag-number';
-import parseEndpoint from './parse-endpoint';
-import parsePrivateEndpoint from './parse-private-endpoint';
-import performRequest from './perform-request';
 
 /**
- * Creates the IGDB API object, populated with methods for all defined endpoints.
+ * Creates the IGDB API object, populated with methods for building a query.
  * @arg {string} [apiKey]
- * @arg {bool} [staging]
  * @returns {Object}
  */
-export default apiKey => {
-    const apiService = config.threeScale;
+export default (apiKey, opts = {}) => {
+    const key = apiKey || process.env.IGDB_API_KEY || global.IGDB_API_KEY;
+    const defaultOptions = {
+        method: 'POST',
+        baseURL: 'https://api-v3.igdb.com',
+        headers: {
+          'user-key': key,
+          accept: 'application/json',
+        },
+        responseType: 'json'
+    };
 
-    apiService.key = apiKey || process.env.IGDB_API_KEY || process.env['3scaleKey'] || process.env.mashapeKey || global.IGDB_API_KEY || global['3scaleKey'] || global.mashapeKey;
-
-    return endpoints.reduce((endpointObj, endpoint) => {
-        endpointObj[endpoint] = parseEndpoint(endpoint, apiService);
-        return endpointObj;
-    }, {
-        private: parsePrivateEndpoint('private', apiService),
-        image: getImage,
-        tagNumber: getTagNumber,
-        scroll: url => performRequest(`${apiService.url}${url}`, apiService),
-        scrollAll: (url, options) => getScrollAll(url, options, apiService, performRequest)
+    return apicalypse({
+        ...defaultOptions,
+        ...opts
     });
 };
 
 export {
-    config
-};
+    getTagNumber
+}

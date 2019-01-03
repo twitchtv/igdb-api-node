@@ -1,24 +1,10 @@
 {
+    "parser": "babel-eslint",
     "env": {
-        "es6": true,
-        "mocha": true,
-        "node": true
+        "node": true,
+        "es6": true
     },
-    "extends": "isotropic",
-    "parserOptions": {
-        "ecmaFeatures": {
-        "experimentalObjectRestSpread": true,
-        "globalReturn": false,
-        "impliedStrict": true,
-        "jsx": false
-        },
-        "ecmaVersion": 2017,
-        "sourceType": "module"
-    },
-    "rules": {
-        "no-bitwise": "off",
-        "no-debugger": "off",
-        "one-var": "off"
-    },
-    "root": true
+    "extends": [
+        "eslint:recommended"
+    ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "igdb-api-node",
-  "version": "3.1.7",
+  "version": "4.0.0",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,7 @@
     "igdb",
     "wrapper"
   ],
-  "author": "Jake Cattral <krazyjakee@gmail.com>",
+  "author": "Jake Cattrall <krazyjakee@gmail.com>",
   "bugs": {
     "url": "https://igdb.github.io/api/about/welcome/#need-support"
   },
@@ -23,40 +23,20 @@
     "Sharpless512 <mahoney_be@hotmail.com>"
   ],
   "dependencies": {
-    "presage": "^0.1.4",
-    "request": "^2.60.0"
+    "presage": "^0.2.0",
+    "request": "^2.88.0"
   },
   "description": "Nodejs API Wrapper for the IGDB.com API",
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.39",
-    "@babel/core": "^7.0.0-beta.39",
-    "@babel/preset-env": "^7.0.0-beta.39",
-    "@babel/register": "^7.0.0-beta.39",
-    "babel-plugin-istanbul": "^4.1.5",
-    "chai": "^4.0.2",
-    "coveralls": "^3.0.0",
-    "cross-env": "^5.1.3",
-    "eslint": "^4.0.0",
-    "eslint-config-isotropic": "^0.5.0",
-    "mocha": "^3.4.2",
-    "nock": "^9.0.13",
-    "nsp": "^2.6.3",
-    "nyc": "^11.4.1",
-    "pre-commit": "^1.2.2"
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.11.1"
   },
   "scripts": {
     "build": "babel js -d lib",
-    "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --compilers js:@babel/register",
-    "publishCoverage": "coveralls < ./coverage/lcov.info",
-    "lint": "eslint js",
-    "posttest": "[ -z \"$npm_config_coverage\" ] || nyc check-coverage --branches 80 --functions 80 --lines 80 --statements 80",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run securityCheck && npm test --coverage",
-    "pretest": "npm run lint",
-    "rebuild": "rm -rf ./node_modules && npm install",
-    "securityCheck": "nsp check",
-    "start": "node lib/index.js | bunyan -L",
-    "test": "mocha --compilers js:@babel/register",
-    "testDebug": "mocha --inspect-brk --compilers js:@babel/register"
+    "start": "node lib/index.js | bunyan -L"
   }
 }

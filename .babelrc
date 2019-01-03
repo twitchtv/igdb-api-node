@@ -1,11 +1,3 @@
 {
-    "comments": false,
-    "presets": ["@babel/preset-env"],
-    "sourceMaps": "inline",
-    "ignore": ["./support/arrow-function-coverage-fix.js"],
-    "env": {
-        "test": {
-            "plugins": ["./support/arrow-function-coverage-fix.js", "istanbul"]
-        }
-    }
+    "presets": ["@babel/preset-env"]
 }
