@@ -47,6 +47,30 @@ const client = igdb('YOUR_API_KEY');
 $ IGDB_API_KEY='YOUR_API_KEY' node yourCode.js
 ```
 
+## Usage
+
+This library wraps node-apicalypse and further examples can be seen here: https://github.com/igdb/node-apicalypse
+
+```js
+// Example using all methods.
+const response = await igdb()
+    .fields(['name', 'movies', 'age']) // fetches only the name, movies, and age fields
+    .fields('name,movies,age') // same as above
+
+    .limit(50) // limit to 50 results
+    .offset(10) // offset results by 10
+
+    .sort('name') // default sort direction is 'asc' (ascending)
+    .sort('name', 'desc') // sorts by name, descending
+    .search('mario') // search for a specific name (search implementations can vary)
+
+    .where(`first_release_date > ${new Date().getTime() / 1000}`) // filter the results
+
+    .request('/games'); // execute the query and return a response object
+
+console.log(response.data);
+```
+
 ### client.tagNumber(category, id)
 
 `igdb-api-node` provides handy method for generating [tag numbers](https://api-docs.igdb.com/#tag-numbers) when doing advanced filtering.

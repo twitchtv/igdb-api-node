@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/igdb/igdb-api-node.git"
   },
-  "homepage": "https://igdb.github.io/api/about/welcome/",
+  "homepage": "https://api-docs.igdb.com",
   "keywords": [
     "api",
     "games",
@@ -16,23 +16,21 @@
   ],
   "author": "Jake Cattrall <krazyjakee@gmail.com>",
   "bugs": {
-    "url": "https://igdb.github.io/api/about/welcome/#need-support"
+    "url": "https://github.com/igdb/igdb-api-node/issues"
   },
   "contributors": [
-    "Duane Sibilly <duane@sibilly.com>",
-    "Sharpless512 <mahoney_be@hotmail.com>"
+    "Duane Sibilly <duane@sibilly.com>"
   ],
   "dependencies": {
-    "presage": "^0.2.0",
-    "request": "^2.88.0"
+    "apicalypse": "^0.1.3"
   },
   "description": "Nodejs API Wrapper for the IGDB.com API",
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.11.1"
+    "eslint": "^5.16.0"
   },
   "scripts": {
     "build": "babel js -d lib",
