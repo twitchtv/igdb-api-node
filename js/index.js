@@ -1,4 +1,5 @@
 import apicalypse from 'apicalypse';
+import merge from 'deepmerge';
 import getTagNumber from './tag-number';
 
 /**
@@ -12,18 +13,13 @@ export default (apiKey, opts = {}) => {
         method: 'POST',
         baseURL: 'https://api-v3.igdb.com',
         headers: {
-          'user-key': key,
-          accept: 'application/json',
+            'user-key': key,
+            accept: 'application/json',
         },
         responseType: 'json'
     };
 
-    return apicalypse({
-        ...defaultOptions,
-        ...opts
-    });
+    return apicalypse(merge(defaultOptions, opts));
 };
 
-export {
-    getTagNumber
-}
+export { getTagNumber };
