@@ -1,6 +1,6 @@
 {
   "name": "igdb-api-node",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
@@ -23,7 +23,8 @@
   ],
   "dependencies": {
     "apicalypse": "^0.1.4",
-    "deepmerge": "^3.3.0"
+    "deepmerge": "^3.3.0",
+    "is-plain-object": "^3.0.0"
   },
   "description": "Nodejs API Wrapper for the IGDB.com API",
   "devDependencies": {
@@ -31,11 +32,13 @@
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "babel-eslint": "^10.0.2",
-    "eslint": "^6.0.1"
+    "eslint": "^6.0.1",
+    "mocha": "^6.1.4"
   },
   "scripts": {
     "build": "babel js -d lib",
     "prepare": "npm run build",
-    "start": "node lib/index.js | bunyan -L"
+    "start": "node lib/index.js | bunyan -L",
+    "test": "npm run build && mocha"
   }
 }

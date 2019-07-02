@@ -1,5 +1,6 @@
 import apicalypse from 'apicalypse';
 import merge from 'deepmerge';
+import isPlainObject from 'is-plain-object';
 import getTagNumber from './tag-number';
 
 /**
@@ -19,7 +20,10 @@ export default (apiKey, opts = {}) => {
         responseType: 'json'
     };
 
-    return apicalypse(merge(defaultOptions, opts));
+    return apicalypse(merge(defaultOptions, opts, {
+        isMergeableObject: isPlainObject
+    }));
 };
 
 export { getTagNumber };
+
