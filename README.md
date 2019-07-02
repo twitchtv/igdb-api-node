@@ -20,7 +20,7 @@ More info here:
 
 ### Via [npm](https://www.npmjs.com/package/igdb-api-node):
 ```bash
-$ npm install igdb-api-node@next
+$ npm install igdb-api-node
 ```
 
 ### In your code:
