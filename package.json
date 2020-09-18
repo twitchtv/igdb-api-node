@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/igdb/igdb-api-node.git"
+    "url": "https://github.com/twitch/igdb-api-node.git"
   },
   "homepage": "https://api-docs.igdb.com",
   "keywords": [
@@ -14,11 +14,12 @@
     "igdb",
     "wrapper"
   ],
-  "author": "Jake Cattrall <krazyjakee@gmail.com>",
+  "author": "IGDB <igdb@igdb.com>",
   "bugs": {
-    "url": "https://github.com/igdb/igdb-api-node/issues"
+    "url": "https://twitch.uservoice.com/forums/929953-igdb?category_id=389365"
   },
   "contributors": [
+    "Jake Cattrall <krazyjakee@gmail.com>",
     "Duane Sibilly <duane@sibilly.com>"
   ],
   "dependencies": {
