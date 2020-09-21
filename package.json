@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/twitch/igdb-api-node.git"
+    "url": "https://github.com/twitchtv/igdb-api-node.git"
   },
   "homepage": "https://api-docs.igdb.com",
   "keywords": [
