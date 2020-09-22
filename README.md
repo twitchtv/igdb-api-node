@@ -5,6 +5,7 @@
 
 A Node.js wrapper for the IGDB.com Free Video Game Database API.
 
+!!! Updated with Twitch Authentication.
 
 ## About IGDB
 One of the principles behind IGDB.com is accessibility of data. We wish to share the data with anyone who wants to build cool videogame oriented websites, apps and services. This means that the information you contribute to IGDB.com can be used by other projects as well.
@@ -39,12 +40,12 @@ import igdb from 'igdb-api-node';
 
 * Pass API key directly:
 ```javascript
-const client = igdb('YOUR_API_KEY');
+const client = igdb('YOUR_TWITCH_CLIENT_ID', 'YOUR_TWITCH_APP_ACCESS_TOKEN');
 ```
 
 * OR set a process environment variable:
 ```bash
-$ IGDB_API_KEY='YOUR_API_KEY' node yourCode.js
+$ TWITCH_CLIENT_ID='YOUR_TWITCH_CLIENT_ID' TWITCH_APP_ACCESS_TOKEN='YOUR_TWITCH_APP_ACCESS_TOKEN' node yourCode.js
 ```
 
 ## Usage
@@ -84,7 +85,7 @@ __Example__
 ```javascript
 import igdb from 'igdb-api-node';
 
-const client = igdb('YOUR_API_KEY'),
+const client = igdb('YOUR_TWITCH_CLIENT_ID', 'YOUR_TWITCH_APP_ACCESS_TOKEN'),
     category = 1, // Genre
     id = 5; // Shooter
     
