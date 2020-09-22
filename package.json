@@ -1,6 +1,6 @@
 {
   "name": "igdb-api-node",
-  "version": "4.0.4",
+  "version": "5.0.0",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
