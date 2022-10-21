@@ -1,6 +1,6 @@
 {
   "name": "igdb-api-node",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
@@ -23,7 +23,7 @@
     "Duane Sibilly <duane@sibilly.com>"
   ],
   "dependencies": {
-    "apicalypse": "^0.1.9",
+    "apicalypse": "^0.2.0",
     "deepmerge": "^4.2.2",
     "is-plain-object": "^4.0.0"
   },
