@@ -1,11 +1,19 @@
 {
   "name": "igdb-api-node",
-  "version": "5.0.2",
-  "main": "lib/index.js",
+  "version": "6.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/twitchtv/igdb-api-node.git"
+  },
+  "scripts": {
+    "prebuild": "node scripts/generate-version.js",
+    "build": "npm run prebuild && tsc",
+    "prepare": "npm run build",
+    "start": "node dist/index.js",
+    "test": "npm run build && mocha"
   },
   "homepage": "https://api-docs.igdb.com",
   "keywords": [
@@ -14,7 +22,7 @@
     "igdb",
     "wrapper"
   ],
-  "author": "IGDB <igdb@igdb.com>",
+  "author": "IGDB <support@igdb.com>",
   "bugs": {
     "url": "https://twitch.uservoice.com/forums/929953-igdb?category_id=389365"
   },
@@ -23,23 +31,13 @@
     "Duane Sibilly <duane@sibilly.com>"
   ],
   "dependencies": {
-    "apicalypse": "^0.2.0",
-    "deepmerge": "^4.2.2",
-    "is-plain-object": "^4.0.0"
+    "apicalypse": "^0.3.1"
   },
   "description": "Nodejs API Wrapper for the IGDB.com API",
   "devDependencies": {
-    "@babel/cli": "^7.13.16",
-    "@babel/core": "^7.13.16",
-    "@babel/preset-env": "^7.13.15",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.25.0",
-    "mocha": "^10.1.0"
-  },
-  "scripts": {
-    "build": "babel js -d lib",
-    "prepare": "npm run build",
-    "start": "node lib/index.js | bunyan -L",
-    "test": "npm run build && mocha"
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.18.126",
+    "mocha": "^10.1.0",
+    "typescript": "^4.5.0"
   }
 }

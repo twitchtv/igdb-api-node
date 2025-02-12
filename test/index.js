@@ -1,5 +1,5 @@
 const assert = require("assert");
-const igdb = require("../lib/index.js").default;
+const igdb = require("../dist/index.js").default;
 
 describe("index.js", () => {
   it("Sets auth headers correctly", () => {
