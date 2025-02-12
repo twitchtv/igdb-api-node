@@ -1,6 +1,6 @@
 {
   "name": "igdb-api-node",
-  "version": "6.0.0",
+  "version": "6.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "Duane Sibilly <duane@sibilly.com>"
   ],
   "dependencies": {
-    "apicalypse": "^0.3.1"
+    "apicalypse": "^1.0.4"
   },
   "description": "Nodejs API Wrapper for the IGDB.com API",
   "devDependencies": {

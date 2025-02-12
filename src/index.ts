@@ -1,27 +1,12 @@
-import apicalypse from 'apicalypse';
+import apicalypse, { ApicalypseConfig } from 'apicalypse';
 import getTagNumber from './tag-number';
 import { VERSION } from './version';
 
-interface IGDBOptions {
-    method?: string;
-    baseURL?: string;
-    headers?: Record<string, string>;
-    responseType?: string;
-    [key: string]: any;
-}
-
-/**
- * Creates the IGDB API object, populated with methods for building a query.
- * @param clientID - The Twitch Client ID
- * @param appAccessToken - The Twitch App Access Token
- * @param opts - Apicalypse Options
- * @returns The configured API client
- */
-export default function createIGDBClient(
+const createIGDBClient = (
     clientID?: string,
     appAccessToken?: string,
-    opts: IGDBOptions = {}
-): ReturnType<typeof apicalypse> {
+    opts: ApicalypseConfig = {}
+): ReturnType<typeof apicalypse> => {
     const id = clientID || process.env.TWITCH_CLIENT_ID || (global as any).TWITCH_CLIENT_ID;
     const token = appAccessToken || process.env.TWITCH_APP_ACCESS_TOKEN || (global as any).TWITCH_APP_ACCESS_TOKEN;
     
@@ -32,7 +17,7 @@ export default function createIGDBClient(
         throw new Error("AppAccessToken must be provided, either as an argument or through env TWITCH_APP_ACCESS_TOKEN");
     }
 
-    const defaultOptions: IGDBOptions = {
+    const defaultOptions: ApicalypseConfig = {
         method: 'POST',
         baseURL: 'https://api.igdb.com/v4',
         headers: {
@@ -57,3 +42,5 @@ export default function createIGDBClient(
 }
 
 export { getTagNumber };
+
+export default createIGDBClient;

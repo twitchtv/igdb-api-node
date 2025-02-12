@@ -27,6 +27,15 @@ describe("index.js", () => {
     assert.deepStrictEqual(Object.keys(client.config.headers).length, normalHeaders + 1);
   });
 
+  it("Should keep initially passed apicalypse object", () => {
+    const query = "fields name;";
+    const vanilla = igdb("a", "b", {
+      apicalypse: query
+    });
+    vanilla.constructOptions();
+    assert.deepStrictEqual(vanilla.config.data, query);
+  });
+
   it("Should not convert buffers to json", () => {
     const client = igdb("a", "b", {
       responseType: "arraybuffer",
